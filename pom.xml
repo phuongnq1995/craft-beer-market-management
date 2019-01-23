@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org</groupId>
 	<artifactId>nguyen-quang-phuong-assignment</artifactId>
@@ -42,12 +44,13 @@
 
 		<!-- log versions -->
 		<slf4j.version>1.6.4</slf4j.version>
+		<logback.version>1.1.3</logback.version>
 		<org.lazyluke.version>0.2.7</org.lazyluke.version>
 
 		<!-- hibernate versions -->
-		<hibernate.version>5.0.12.Final</hibernate.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
 		<hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
-		<hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
+		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
 
 		<!-- jpa version -->
 		<spring-data-jpa.version>1.11.7.RELEASE</spring-data-jpa.version>
@@ -59,6 +62,11 @@
 
 		<!-- encoding build -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- maven complier -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -220,9 +228,9 @@
 				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
 			</dependency>
 
 			<!-- Log4JDBC -->
@@ -264,5 +272,21 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 </project>

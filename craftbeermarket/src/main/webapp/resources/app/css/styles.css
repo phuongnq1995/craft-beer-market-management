@@ -1,0 +1,12 @@
+.body {
+	min-height: 500px;
+}
+
+.navbar-brand-cbm {
+	float: left;
+	height: 50px;
+	padding: 10px 15px;
+	font-size: 18px;
+	line-height: 20px;
+	margin-left: -15px;
+}

@@ -12,7 +12,6 @@
 	<jpa:repositories base-package="org.assignment.domain.repository" />
 
 	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="showSql" value="${hibernate.show_sql}" />
 		<property name="database" value="${database}" />
 	</bean>
 

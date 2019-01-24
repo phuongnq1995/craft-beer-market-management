@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Disable secure resources -->
+	<sec:http pattern="/resources/**" security="none" />
+
+	<!-- Http security settings -->
+	<sec:http>
+		<sec:form-login login-page="/auth/login" login-processing-url="/auth/login" default-target-url="/"
+			always-use-default-target="true" authentication-failure-handler-ref="authenticationFailureHandler" />
+		<sec:intercept-url pattern="/auth/login" access="isAnonymous()" />
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+		<sec:logout logout-success-url="/auth/login" logout-url="/auth/logout" />
+		<sec:access-denied-handler ref="accessDeniedHandler" />
+		<sec:session-management />
+	</sec:http>
+
+	<!-- Authentication manager process -->
+	<sec:authentication-manager>
+		<sec:authentication-provider user-service-ref="userDetailServiceImpl">
+			<sec:password-encoder ref="passwordEncoder" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<!-- Authentication failure handler -->
+	<bean id="authenticationFailureHandler"
+		class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/auth/login?error" />
+	</bean>
+
+	<!-- Password encoder -->
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="11" />
+	</bean>
+
+	<!-- CSRF Protection -->
+	<bean id="accessDeniedHandler" class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+		<constructor-arg index="0">
+			<map>
+				<entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
+					<bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+						<property name="errorPage" value="/WEB-INF/views/common/error/invalidCsrfTokenError.jsp" />
+					</bean>
+				</entry>
+				<entry key="org.springframework.security.web.csrf.MissingCsrfTokenException">
+					<bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+						<property name="errorPage" value="/WEB-INF/views/common/error/missingCsrfTokenError.jsp" />
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>
+		<constructor-arg index="1">
+			<bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+				<property name="errorPage" value="/WEB-INF/views/common/error/accessDeniedError.jsp" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+</beans>

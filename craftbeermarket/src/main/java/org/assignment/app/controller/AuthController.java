@@ -25,10 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value="auth")
 public class AuthController {
 
-	private static final String LOGIN_REQUEST = "login";
-	private static final String REGISTER_REQUEST = "register";
 	private static final String REDIRECT_HOME_REQUEST = "redirect:/";
-	
 	private static final String LOGIN_PAGE_PATH = "auth/loginForm";
 	private static final String REGISTER_PAGE_PATH = "auth/registerForm";
 
@@ -48,17 +45,17 @@ public class AuthController {
 		return new AuthForm();
 	}
 
-	@RequestMapping(value = LOGIN_REQUEST, method = RequestMethod.GET)
+	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login() {
 		return LOGIN_PAGE_PATH;
 	}
 
-	@RequestMapping(value = REGISTER_REQUEST, method = RequestMethod.GET)
+	@RequestMapping(value = "register", method = RequestMethod.GET)
 	public String register() {
 		return REGISTER_PAGE_PATH;
 	}
 
-	@RequestMapping(value = REGISTER_REQUEST, method = RequestMethod.POST)
+	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String processRegistration(@Validated AuthForm authForm, BindingResult bindingResult, Model model,
 			RedirectAttributes redirectAttributes) {
 		// If form has errors

@@ -1,12 +1,73 @@
-.body {
-	min-height: 500px;
-}
-
-.navbar-brand-cbm {
+.cbm-navbar-brand {
 	float: left;
 	height: 50px;
 	padding: 10px 15px;
 	font-size: 18px;
 	line-height: 20px;
 	margin-left: -15px;
+}
+
+.cbm-error {
+	margin-bottom: 10px;
+	background-image: linear-gradient(to bottom, #f2dede 0%, #e7c3c3 100%);
+	background-repeat: repeat-x;
+	border-color: #dca7a7;
+	color: #a94442;
+	background-color: #f2dede;
+}
+
+.cbm-required-field {
+	color: red;
+}
+
+.cbm-div-action {
+	min-height: 20px;
+	padding: 4px;
+	text-align: right;
+}
+
+.cbm-button {
+	color: #fff;
+	background-color: #5cb85c;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff419641',
+		GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled= false);
+	background-repeat: repeat-x;
+}
+
+.cbm-button:active, .cbm-button:hover, .cbm-button:focus {
+	color: #fff;
+}
+
+.cbm-button:hover, .cbm-button:focus {
+	background-color: #419641;
+	background-position: 0 -15px;
+}
+
+.cbm-button:active {
+	background-color: #419641;
+	border-color: #3e8f3e;
+}
+
+.cbm-button-warning {
+	background-color: #eb9316;
+	color: #FFF;
+}
+
+.cbm-button-warning:active, .cbm-button-warning:hover, .cbm-button-warning:focus {
+	color: #FFF;
+}
+
+.cbm-button-warning:hover, .cbm-button-warning:focus {
+	background-color: #DF8B15;
+	border-color: #D7820A;
+}
+
+.cbm-page-header {
+	padding-bottom: 9px;
+	border-bottom: 1px solid #eee;
+}
+
+.cbm-top-buffer {
+	margin-top: 20px;
 }

@@ -19,10 +19,14 @@
 <script src="${pageContext.request.contextPath}/resources/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 	<tiles:insertAttribute name="header" />
+
 	<div class="link-header">
 		<tiles:insertAttribute name="header-link" ignore="true" />
 	</div>
+
+	<!-- Message to user -->
 	<div class="container-fluid body">
 		<c:if test="${not empty message}">
 			<div class="col-md-8 col-md-offset-2 cbm-top-buffer">
@@ -33,8 +37,13 @@
 		</c:if>
 		<tiles:insertAttribute name="body" />
 	</div>
+
 	<div class="footer">
 		<tiles:insertAttribute name="footer" />
 	</div>
+
+	<!-- Delete confirm -->
+	<input type="hidden" id="confirmMessage" value='<spring:message code="confirm.delete"/>' />
+	<script src="${pageContext.request.contextPath}/resources/app/js/common.js"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <tiles:insertDefinition name="layouts">
 	<tiles:putAttribute name="header-link">
-		<input type="hidden" id="confirmMessage" value='<spring:message code="confirm.delete"/>' />
 		<ol class="breadcrumb">
 			<li><a href="${pageContext.request.contextPath}/"><i class="fa fa-home"></i> <spring:message
 						code="labels.home" /></a></li>
@@ -45,6 +44,5 @@
 				</tbody>
 			</table>
 		</div>
-		<script src="${pageContext.request.contextPath}/resources/app/js/category/index.js"></script>
 	</tiles:putAttribute>
 </tiles:insertDefinition>

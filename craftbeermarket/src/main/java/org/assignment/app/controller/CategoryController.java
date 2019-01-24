@@ -86,7 +86,7 @@ public class CategoryController {
 			// Copy data from form to entity
 			BeanUtils.copyProperties(categoryForm, category);
 
-			// Register user
+			// Register category
 			categoryService.save(category);
 
 		} catch (Exception ex) {
@@ -132,7 +132,7 @@ public class CategoryController {
 			// Copy data from form to entity
 			BeanUtils.copyProperties(categoryForm, category);
 
-			// Register user
+			// Update category
 			categoryService.save(category);
 
 		} catch (Exception ex) {
@@ -155,8 +155,9 @@ public class CategoryController {
 	 */
 	@RequestMapping(value="/delete/{categoryId}", method=RequestMethod.GET)
 	public String delete(@PathVariable("categoryId") Long categoryId, Model model, RedirectAttributes attributes) {
-
 		try {
+
+			// Delete category
 			categoryService.delete(categoryId);
 		} catch (Exception ex) {
 			// Message exception

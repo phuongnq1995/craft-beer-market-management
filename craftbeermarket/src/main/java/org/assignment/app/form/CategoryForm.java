@@ -17,7 +17,7 @@ public class CategoryForm implements Serializable {
 
 	private Long categoryId;
 
-	@NotEmpty
+	@NotEmpty(message="{category.notempty.name}")
 	private String name;
 
 	private String description;

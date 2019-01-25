@@ -1,6 +1,8 @@
 package org.assignment.app.controller;
 
+import org.assignment.app.component.MessageHandler;
 import org.assignment.app.form.CategoryForm;
+import org.assignment.common.MessageType;
 import org.assignment.domain.entity.Category;
 import org.assignment.domain.service.CategoryService;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +32,9 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 
+	@Autowired
+	MessageHandler messageHandler;
+
 	/**
 	 * Set up form
 	 * @return CategoryForm
@@ -58,7 +63,7 @@ public class CategoryController {
 	 * @return register page
 	 */
 	@RequestMapping(value = "register", method = RequestMethod.GET)
-	public String displayRegister(CategoryForm categoryForm) {
+	public String displayRegister(CategoryForm categoryForm, Model model) {
 		return REGISTER_PAGE_PATH;
 	}
 
@@ -77,7 +82,7 @@ public class CategoryController {
 
 		// If form has errors
 		if (bindingResult.hasErrors()) {
-			return REGISTER_PAGE_PATH;
+			return displayRegister(categoryForm, model);
 		}
 
 		try {
@@ -92,11 +97,12 @@ public class CategoryController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute("message", ex.getMessage());
-			return REGISTER_PAGE_PATH;
+			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
+			return displayRegister(categoryForm, model);
 		}
 
-		redirectAttributes.addFlashAttribute("message", "register success !");
+		redirectAttributes.addFlashAttribute(messageHandler.handleMessage(
+				MessageType.SUCCESS, "success.register"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 
@@ -117,6 +123,14 @@ public class CategoryController {
 		return UPDATE_PAGE_PATH;
 	}
 
+	/**
+	 * Process update
+	 * @param categoryForm
+	 * @param bindingResult
+	 * @param model
+	 * @param redirectAttributes
+	 * @return UPDATE_PAGE_PATH if has error else REDIRECT_INDEX_REQUEST
+	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String processUpdate(@Validated CategoryForm categoryForm, BindingResult bindingResult, Model model,
 			RedirectAttributes redirectAttributes) {
@@ -138,11 +152,12 @@ public class CategoryController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute("message", ex.getMessage());
+			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
 			return UPDATE_PAGE_PATH;
 		}
 
-		redirectAttributes.addFlashAttribute("message", "update success !");
+		redirectAttributes.addFlashAttribute(messageHandler.handleMessage(
+				MessageType.SUCCESS, "success.update"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 
@@ -151,7 +166,7 @@ public class CategoryController {
 	 * @param categoryId - category id
 	 * @param model - for messages errors
 	 * @param attributes - for messages success
-	 * @return index page
+	 * @return INDEX_PAGE_PATH if has error else REDIRECT_INDEX_REQUEST
 	 */
 	@RequestMapping(value="/delete/{categoryId}", method=RequestMethod.GET)
 	public String delete(@PathVariable("categoryId") Long categoryId, Model model, RedirectAttributes attributes) {
@@ -161,11 +176,12 @@ public class CategoryController {
 			categoryService.delete(categoryId);
 		} catch (Exception ex) {
 			// Message exception
-			model.addAttribute("message", ex.getMessage());
+			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
 			return INDEX_PAGE_PATH;
 		}
 
-		attributes.addFlashAttribute("message", "delete success !");
+		attributes.addFlashAttribute(messageHandler.handleMessage(
+				MessageType.SUCCESS, "success.delete"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 }

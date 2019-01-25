@@ -28,13 +28,7 @@
 
 	<!-- Message to user -->
 	<div class="container-fluid body">
-		<c:if test="${not empty message}">
-			<div class="col-md-8 col-md-offset-2 cbm-top-buffer">
-				<div class="alert alert-info">
-					${message}
-				</div>
-			</div>
-		</c:if>
+		<tiles:insertAttribute name="messages" />
 		<tiles:insertAttribute name="body" />
 	</div>
 

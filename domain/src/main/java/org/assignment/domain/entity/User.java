@@ -1,6 +1,5 @@
 package org.assignment.domain.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,12 +17,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="m_user")
-public class User implements Serializable {
+public class User extends BaseEntityAudit {
 
 	/**
-	 * serialVersionUID
+	 * 
 	 */
-	private static final long serialVersionUID = -1137912664592693136L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String username;

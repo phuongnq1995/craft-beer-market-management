@@ -1,6 +1,5 @@
 package org.assignment.domain.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "category")
-public class Category implements Serializable {
+public class Category extends BaseEntityAudit {
 
 	/**
 	 * serialVersionUID

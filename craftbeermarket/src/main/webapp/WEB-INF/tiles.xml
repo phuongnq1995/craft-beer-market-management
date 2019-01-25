@@ -8,6 +8,7 @@
 	<definition name="layouts" template="/WEB-INF/views/layout/template.jsp">
 		<put-attribute name="title" value="Craft beer market" />
 		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="messages" value="/WEB-INF/views/layout/messages.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
 	</definition>
 </tiles-definitions>

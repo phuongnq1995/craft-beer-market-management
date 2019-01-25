@@ -23,22 +23,33 @@
 				<thead>
 					<tr>
 						<th><spring:message code="labels.beer.name" /></th>
+						<th><spring:message code="labels.beer.manufacturer" /></th>
+						<th><spring:message code="labels.beer.category" /></th>
+						<th><spring:message code="labels.beer.country" /></th>
+						<th><spring:message code="labels.beer.price" /></th>
 						<th><spring:message code="labels.beer.description" /></th>
+						<th><spring:message code="labels.beer.isArchived" /></th>
 						<th><spring:message code="labels.button.delete" /></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${beers}" var="beer">
 						<tr>
-							<td><a href="${pageContext.request.contextPath}/beer/update/${beer.getbeerId()}">
+							<td><a href="${pageContext.request.contextPath}/beer/update/${beer.getBeerId()}">
 									${beer.getName()}
 								</a>
 							</td>
+							<td>${beer.getManufacturer()}</td>
+							<td>${beer.getCategoryName()}</td>
+							<td>${beer.getCountry()}</td>
+							<td>${beer.getPrice()}</td>
 							<td>${beer.getDescription()}</td>
+							<td>${beer.getIsArchived}</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/beer/delete/${beer.getbeerId()}" 
+								<a href="${pageContext.request.contextPath}/beer/delete/${beer.getBeerId()}" 
 									class="delete">
-									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</a>
 							</td>
 						</tr>
 					</c:forEach>

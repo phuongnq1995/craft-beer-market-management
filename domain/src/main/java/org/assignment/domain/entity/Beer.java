@@ -1,6 +1,5 @@
 package org.assignment.domain.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -8,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="beer")
-public class Beer implements Serializable{
+public class Beer extends BaseEntityAudit {
 
 	/**
 	 * serialVersionUID
@@ -47,8 +47,8 @@ public class Beer implements Serializable{
 	@Column(name="category_id")
 	private Long categoryId;
 
-	@Column(name="is_archive")
-	private Boolean isArchive;
+	@Column(name="is_archived")
+	private Boolean isArchived;
 
 	/**
 	 * @return the beerId
@@ -149,17 +149,17 @@ public class Beer implements Serializable{
 	}
 
 	/**
-	 * @return the isArchive
+	 * @return the isArchived
 	 */
-	public Boolean getIsArchive() {
-		return isArchive;
+	public Boolean getIsArchived() {
+		return isArchived;
 	}
 
 	/**
-	 * @param isArchive the isArchive to set
+	 * @param isArchived the isArchived to set
 	 */
-	public void setIsArchive(Boolean isArchive) {
-		this.isArchive = isArchive;
+	public void setIsArchived(Boolean isArchived) {
+		this.isArchived = isArchived;
 	}
 
 }

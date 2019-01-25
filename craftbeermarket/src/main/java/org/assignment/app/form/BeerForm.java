@@ -3,6 +3,15 @@ package org.assignment.app.form;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+/**
+ * @author Phuongnq
+ * BeerForm
+ */
 public class BeerForm implements Serializable {
 
 	/**
@@ -12,19 +21,26 @@ public class BeerForm implements Serializable {
 
 	private Long beerId;
 
+	@NotEmpty(message="{beer.notempty.manufacturer}")
 	private String manufacturer;
 
+	@NotEmpty(message="{beer.notempty.name}")
 	private String name;
 
+	@NotEmpty(message="{beer.notempty.country}")
 	private String country;
 
+	@Min(value=0, message="{beer.min.price}")
+	@NotNull(message="{beer.notnull.price}")
 	private BigDecimal price;
 
 	private String description;
 
+	@NotNull(message="{beer.notempty.category}")
 	private Long categoryId;
 
-	private Boolean isArchive;
+	// Default
+	private Boolean isArchived;
 
 	/**
 	 * @return the beerId
@@ -125,17 +141,17 @@ public class BeerForm implements Serializable {
 	}
 
 	/**
-	 * @return the isArchive
+	 * @return the isArchived
 	 */
-	public Boolean getIsArchive() {
-		return isArchive;
+	public Boolean getIsArchived() {
+		return isArchived;
 	}
 
 	/**
-	 * @param isArchive the isArchive to set
+	 * @param isArchived the isArchived to set
 	 */
-	public void setIsArchive(Boolean isArchive) {
-		this.isArchive = isArchive;
+	public void setIsArchived(Boolean isArchived) {
+		this.isArchived = isArchived;
 	}
 
 }

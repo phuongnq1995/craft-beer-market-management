@@ -2,8 +2,9 @@ package org.assignment.domain.service;
 
 import java.util.List;
 
+import org.assignment.domain.dto.BeerAvailableDTO;
+import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
-import org.assignment.domain.model.BeerModel;
 
 /**
  * @author Phuongnq
@@ -15,7 +16,7 @@ public interface BeerService {
 	 * Get all beer
 	 * @return List beer in database
 	 */
-	List<BeerModel> getAll();
+	List<BeerDTO> getAll();
 
 	/**
 	 * Save a beer
@@ -35,5 +36,12 @@ public interface BeerService {
 	 * @param beerId
 	 */
 	void delete(Long beerId);
+
+	/**
+	 * getBeerByStatus
+	 * @param isArchived - Boolean
+	 * @return isArchived
+	 */
+	List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived);
 
 }

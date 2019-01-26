@@ -1,10 +1,12 @@
-package org.assignment.domain.service;
+package org.assignment.domain.service.impl;
 
 import java.util.List;
 
+import org.assignment.domain.dto.BeerAvailableDTO;
+import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
-import org.assignment.domain.model.BeerModel;
 import org.assignment.domain.repository.BeerRepository;
+import org.assignment.domain.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +31,16 @@ public class BeerServiceImpl implements BeerService {
 	 * @see org.assignment.domain.service.BeerService#getAll()
 	 */
 	@Override
-	public List<BeerModel> getAll() {
+	public List<BeerDTO> getAll() {
 		return beerRepository.getAllBeer();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.BeerService#getBeerByStatus(java.lang.Boolean)
+	 */
+	@Override
+	public List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived) {
+		return beerRepository.getBeerByStatus(isArchived);
 	}
 
 	/* (non-Javadoc)

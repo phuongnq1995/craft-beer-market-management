@@ -1,11 +1,8 @@
-package org.assignment.domain.model;
+package org.assignment.domain.dto;
 
 import java.math.BigDecimal;
 
-/**
- * @author phuongnq BeerModel
- */
-public class BeerModel {
+public class BeerAvailableDTO {
 
 	private Long beerId;
 	private String manufacturer;
@@ -13,8 +10,18 @@ public class BeerModel {
 	private String country;
 	private String description;
 	private BigDecimal price;
-	private Long categoryName;
-	private Boolean isArchived;
+	private String categoryName;
+
+	public BeerAvailableDTO(Long beerId, String manufacturer, String name, String country, String description,
+			BigDecimal price, String categoryName) {
+		this.beerId = beerId;
+		this.manufacturer = manufacturer;
+		this.name = name;
+		this.country = country;
+		this.description = description;
+		this.price = price;
+		this.categoryName = categoryName;
+	}
 
 	/**
 	 * @return the beerId
@@ -103,45 +110,15 @@ public class BeerModel {
 	/**
 	 * @return the categoryName
 	 */
-	public Long getCategoryName() {
+	public String getCategoryName() {
 		return categoryName;
 	}
 
 	/**
 	 * @param categoryName the categoryName to set
 	 */
-	public void setCategoryName(Long categoryName) {
+	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
 
-	/**
-	 * @return the isArchived
-	 */
-	public Boolean getIsArchived() {
-		return isArchived;
-	}
-
-	/**
-	 * @param isArchived the isArchived to set
-	 */
-	public void setIsArchived(Boolean isArchived) {
-		this.isArchived = isArchived;
-	}
-
-	public BeerModel(Long beerId, String manufacturer, String name, String country, String description,
-			BigDecimal price, Long categoryName, Boolean isArchived) {
-		super();
-		this.beerId = beerId;
-		this.manufacturer = manufacturer;
-		this.name = name;
-		this.country = country;
-		this.description = description;
-		this.price = price;
-		this.categoryName = categoryName;
-		this.isArchived = isArchived;
-	}
-
-	public BeerModel() {
-		super();
-	}
 }

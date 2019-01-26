@@ -1,5 +1,6 @@
 package org.assignment.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;  
 
 import javax.persistence.Column;  
@@ -7,14 +8,20 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;  
 import javax.persistence.PreUpdate;  
 import javax.persistence.Temporal;  
-import javax.persistence.TemporalType;  
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;  
 
 /**
- * @author phuongnq BaseEntityAudit
+ * @author phuongnq 
+ * BaseEntityAudit
  */
 @MappedSuperclass
-public class BaseEntityAudit extends BaseEntity {
+public abstract class BaseEntityAudit implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)

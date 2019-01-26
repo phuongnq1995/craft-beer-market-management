@@ -1,53 +1,34 @@
-package org.assignment.domain.entity;
+package org.assignment.domain.dto;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
- * @author Phuongnq
- * Beer entity
- * Table name "beer"
+ * @author phuongnq 
+ * BeerModel
  */
-@Entity
-@Table(name="beer")
-public class Beer extends BaseEntityAudit {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -5823708872964400506L;
+public class BeerDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="beer_id")
 	private Long beerId;
-
-	@Column(name="manufacturer")
 	private String manufacturer;
-
-	@Column(name="name")
 	private String name;
-
-	@Column(name="country")
 	private String country;
-
-	@Column(name="price")
-	private BigDecimal price;
-
-	@Column(name="description")
 	private String description;
-
-	@Column(name="category_id")
-	private Long categoryId;
-
-	@Column(name="is_archived")
+	private BigDecimal price;
 	private Boolean isArchived;
+	private String categoryName;
+
+	public BeerDTO(Long beerId, String manufacturer, String name, String country, String description,
+			BigDecimal price, Boolean isArchived, String categoryName) {
+		this.beerId = beerId;
+		this.manufacturer = manufacturer;
+		this.name = name;
+		this.country = country;
+		this.description = description;
+		this.price = price;
+		this.isArchived = isArchived;
+		this.categoryName = categoryName;
+	}
 
 	/**
 	 * @return the beerId
@@ -106,20 +87,6 @@ public class Beer extends BaseEntityAudit {
 	}
 
 	/**
-	 * @return the price
-	 */
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	/**
-	 * @param price the price to set
-	 */
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	/**
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -134,17 +101,17 @@ public class Beer extends BaseEntityAudit {
 	}
 
 	/**
-	 * @return the categoryId
+	 * @return the price
 	 */
-	public Long getCategoryId() {
-		return categoryId;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
 	/**
-	 * @param categoryId the categoryId to set
+	 * @param price the price to set
 	 */
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	/**
@@ -159,6 +126,20 @@ public class Beer extends BaseEntityAudit {
 	 */
 	public void setIsArchived(Boolean isArchived) {
 		this.isArchived = isArchived;
+	}
+
+	/**
+	 * @return the categoryName
+	 */
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	/**
+	 * @param categoryName the categoryName to set
+	 */
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }

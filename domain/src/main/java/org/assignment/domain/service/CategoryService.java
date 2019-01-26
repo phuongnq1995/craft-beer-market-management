@@ -25,8 +25,9 @@ public interface CategoryService {
 	/**
 	 * Delete a category
 	 * @param categoryId
+	 * @throws Exception 
 	 */
-	void delete(Long categoryId);
+	void delete(Long categoryId) throws Exception;
 
 	/**
 	 * Select category by categoryId

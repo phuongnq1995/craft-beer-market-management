@@ -1,11 +1,10 @@
 package org.assignment.app.controller;
 
-import org.assignment.app.component.MessageHandler;
 import org.assignment.app.form.CategoryForm;
-import org.assignment.common.MessageType;
+import org.assignment.common.CopyProperties;
+import org.assignment.common.Messages;
 import org.assignment.domain.entity.Category;
 import org.assignment.domain.service.CategoryService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +30,6 @@ public class CategoryController {
 
 	@Autowired
 	CategoryService categoryService;
-
-	@Autowired
-	MessageHandler messageHandler;
 
 	/**
 	 * Set up form
@@ -89,7 +85,7 @@ public class CategoryController {
 			Category category = new Category();
 
 			// Copy data from form to entity
-			BeanUtils.copyProperties(categoryForm, category);
+			CopyProperties.copyProperties(categoryForm, category);
 
 			// Register category
 			categoryService.save(category);
@@ -97,12 +93,11 @@ public class CategoryController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
+			model.addAttribute(Messages.error().message(ex.getMessage()));
 			return displayRegister(categoryForm, model);
 		}
 
-		redirectAttributes.addFlashAttribute(messageHandler.handleMessage(
-				MessageType.SUCCESS, "success.register"));
+		redirectAttributes.addFlashAttribute(Messages.success().message("success.register"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 
@@ -118,7 +113,7 @@ public class CategoryController {
 	public String displayUpdate(@PathVariable("categoryId") Long categoryId, CategoryForm categoryForm, Model model) {
 		Category category = categoryService.findByCategoryId(categoryId);
 
-		BeanUtils.copyProperties(category, categoryForm);
+		CopyProperties.copyProperties(category, categoryForm);
 
 		return UPDATE_PAGE_PATH;
 	}
@@ -144,7 +139,7 @@ public class CategoryController {
 			Category category = new Category();
 
 			// Copy data from form to entity
-			BeanUtils.copyProperties(categoryForm, category);
+			CopyProperties.copyProperties(categoryForm, category);
 
 			// Update category
 			categoryService.save(category);
@@ -152,12 +147,11 @@ public class CategoryController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
+			model.addAttribute(Messages.error().message(ex.getMessage()));
 			return UPDATE_PAGE_PATH;
 		}
 
-		redirectAttributes.addFlashAttribute(messageHandler.handleMessage(
-				MessageType.SUCCESS, "success.update"));
+		redirectAttributes.addFlashAttribute(Messages.success().message("success.update"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 
@@ -176,12 +170,11 @@ public class CategoryController {
 			categoryService.delete(categoryId);
 		} catch (Exception ex) {
 			// Message exception
-			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
-			return INDEX_PAGE_PATH;
+			attributes.addFlashAttribute(Messages.error().message("meesage.category.delete"));
+			return REDIRECT_INDEX_REQUEST;
 		}
 
-		attributes.addFlashAttribute(messageHandler.handleMessage(
-				MessageType.SUCCESS, "success.delete"));
+		attributes.addFlashAttribute(Messages.success().message("success.delete"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 }

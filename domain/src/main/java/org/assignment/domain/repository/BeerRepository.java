@@ -2,8 +2,9 @@ package org.assignment.domain.repository;
 
 import java.util.List;
 
+import org.assignment.domain.dto.BeerAvailableDTO;
+import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
-import org.assignment.domain.model.BeerModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,6 +20,8 @@ public interface BeerRepository extends JpaRepository<Beer, Long> {
 	 * @return all beer information
 	 */
 	@Query(nativeQuery=true)
-	List<BeerModel> getAllBeer();
+	List<BeerDTO> getAllBeer();
 
+	@Query(nativeQuery=true)
+	List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived);
 }

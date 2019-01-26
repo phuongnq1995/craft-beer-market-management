@@ -5,6 +5,8 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<sec:global-method-security pre-post-annotations="enabled" />
+
 	<!-- Disable secure resources -->
 	<sec:http pattern="/resources/**" security="none" />
 
@@ -13,9 +15,12 @@
 		<sec:form-login login-page="/auth/login" login-processing-url="/auth/login" default-target-url="/"
 			always-use-default-target="true" authentication-failure-handler-ref="authenticationFailureHandler" />
 		<sec:intercept-url pattern="/auth/login" access="isAnonymous()" />
+		<sec:intercept-url pattern="/api-beer" access="isAnonymous()" />
+		<sec:intercept-url pattern="/oauth/login" access="isAnonymous()" />
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 		<sec:logout logout-success-url="/auth/login" logout-url="/auth/logout" />
 		<sec:access-denied-handler ref="accessDeniedHandler" />
+		<sec:csrf disabled="true" />
 		<sec:session-management />
 	</sec:http>
 

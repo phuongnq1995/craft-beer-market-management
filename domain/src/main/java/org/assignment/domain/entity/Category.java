@@ -19,7 +19,7 @@ public class Category extends BaseEntityAudit {
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = 394299663444536384L;
+	private static final long serialVersionUID = -5799612466275949173L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

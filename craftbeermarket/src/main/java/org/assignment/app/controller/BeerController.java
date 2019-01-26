@@ -1,13 +1,12 @@
 package org.assignment.app.controller;
 
-import org.assignment.app.component.MessageHandler;
 import org.assignment.app.form.BeerForm;
 import org.assignment.common.BeerStatus;
-import org.assignment.common.MessageType;
+import org.assignment.common.CopyProperties;
+import org.assignment.common.Messages;
 import org.assignment.domain.entity.Beer;
 import org.assignment.domain.service.BeerService;
 import org.assignment.domain.service.CategoryService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +31,6 @@ public class BeerController {
 	private static final String REGISTER_PAGE_PATH = "beer/register";
 	private static final String UPDATE_PAGE_PATH = "beer/update";
 
-	@Autowired
-	MessageHandler messageHandler;
-	
 	@Autowired
 	BeerService beerService;
 
@@ -75,8 +71,7 @@ public class BeerController {
 	 */
 	@RequestMapping(value = "register", method = RequestMethod.GET)
 	public String displayRegister(BeerForm beerForm, Model model) {
-		model.addAttribute("categories", categoryService.getAll());
-		model.addAttribute("beerStatus", BeerStatus.values());
+		addCommon(model);
 		return REGISTER_PAGE_PATH;
 	}
 
@@ -95,14 +90,15 @@ public class BeerController {
 
 		// If form has errors
 		if (bindingResult.hasErrors()) {
-			return displayRegister(beerForm, model);
+			addCommon(model);
+			return REGISTER_PAGE_PATH;
 		}
 
 		try {
 			Beer beer = new Beer();
 
 			// Copy data from form to entity
-			BeanUtils.copyProperties(beerForm, beer);
+			CopyProperties.copyProperties(beerForm, beer);
 
 			// Register beer
 			beerService.save(beer);
@@ -110,12 +106,11 @@ public class BeerController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
+			model.addAttribute(Messages.error().message(ex.getMessage()));
 			return REGISTER_PAGE_PATH;
 		}
 
-		redirectAttributes.addFlashAttribute(messageHandler.handleMessage(
-			MessageType.SUCCESS, "success.register"));
+		redirectAttributes.addFlashAttribute(Messages.success().message("success.register"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 
@@ -129,7 +124,10 @@ public class BeerController {
 	@RequestMapping(value = "update/{beerId}", method = RequestMethod.GET)
 	public String displayUpdate(@PathVariable("beerId") Long beerId, BeerForm beerForm, Model model) {
 		Beer beer = beerService.findByBeerId(beerId);
-		BeanUtils.copyProperties(beer, beerForm);
+
+		CopyProperties.copyProperties(beer, beerForm);
+
+		addCommon(model);
 		return UPDATE_PAGE_PATH;
 	}
 
@@ -154,7 +152,7 @@ public class BeerController {
 			Beer beer = new Beer();
 
 			// Copy data from form to entity
-			BeanUtils.copyProperties(beerForm, beer);
+			CopyProperties.copyProperties(beerForm, beer);
 
 			// Update category
 			beerService.save(beer);
@@ -162,12 +160,11 @@ public class BeerController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
+			model.addAttribute(Messages.error().message(ex.getMessage()));
 			return UPDATE_PAGE_PATH;
 		}
 
-		redirectAttributes.addFlashAttribute(messageHandler.handleMessage(
-				MessageType.SUCCESS, "success.update"));
+		redirectAttributes.addFlashAttribute(Messages.success().message("success.update"));
 		return REDIRECT_INDEX_REQUEST;
 	}
 
@@ -186,12 +183,22 @@ public class BeerController {
 			beerService.delete(beerId);
 		} catch (Exception ex) {
 			// Message exception
-			model.addAttribute(messageHandler.handleMessage(MessageType.ERROR, null, ex.getMessage()));
+			model.addAttribute(Messages.error().message(ex.getMessage()));
 			return INDEX_PAGE_PATH;
 		}
 
-		attributes.addFlashAttribute(messageHandler.handleMessage(
-				MessageType.SUCCESS, "success.delete"));
+		attributes.addFlashAttribute(Messages.success().message("success.delete"));
 		return REDIRECT_INDEX_REQUEST;
+	}
+
+	/**
+	 * Add common
+	 * @param model
+	 * @return addCommon
+	 */
+	private Model addCommon(Model model) {
+		model.addAttribute("categories", categoryService.getAll());
+		model.addAttribute("beerStatus", BeerStatus.values());
+		return model;
 	}
 }

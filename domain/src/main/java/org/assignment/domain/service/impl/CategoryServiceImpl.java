@@ -1,9 +1,10 @@
-package org.assignment.domain.service;
+package org.assignment.domain.service.impl;
 
 import java.util.List;
 
 import org.assignment.domain.entity.Category;
 import org.assignment.domain.repository.CategoryRepository;
+import org.assignment.domain.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +40,10 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @see org.assignment.domain.service.CategoryService#delete(java.lang.Long)
 	 */
 	@Override
-	public void delete(Long categoryId) {
+	public void delete(Long categoryId) throws Exception {
+		if(categoryRepository.existAnyBeer(categoryId) == 1) {
+			throw new Exception("need to delete all of beer in this category");
+		}
 		categoryRepository.delete(categoryId);
 	}
 

@@ -28,7 +28,7 @@
 						<th><spring:message code="labels.beer.country" /></th>
 						<th><spring:message code="labels.beer.price" /></th>
 						<th><spring:message code="labels.beer.description" /></th>
-						<th><spring:message code="labels.beer.isArchived" /></th>
+						<th><spring:message code="labels.beer.status" /></th>
 						<th><spring:message code="labels.button.delete" /></th>
 					</tr>
 				</thead>
@@ -44,7 +44,16 @@
 							<td>${beer.getCountry()}</td>
 							<td>${beer.getPrice()}</td>
 							<td>${beer.getDescription()}</td>
-							<td>${beer.getIsArchived}</td>
+							<td>
+								<c:choose>
+									<c:when test="${beer.getIsArchived()}">
+										<i class="glyphicon glyphicon-remove" style="color:red"></i>
+									</c:when>
+									<c:otherwise>
+										<i class="fa fa-check" style="color:green"></i>
+									</c:otherwise>
+								</c:choose>
+							</td>
 							<td>
 								<a href="${pageContext.request.contextPath}/beer/delete/${beer.getBeerId()}" 
 									class="delete">

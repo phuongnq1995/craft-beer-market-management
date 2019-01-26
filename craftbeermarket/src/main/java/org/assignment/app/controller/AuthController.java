@@ -2,9 +2,10 @@ package org.assignment.app.controller;
 
 import org.assignment.app.form.AuthForm;
 import org.assignment.app.validator.AuthValidator;
+import org.assignment.common.CopyProperties;
+import org.assignment.common.Messages;
 import org.assignment.domain.entity.User;
 import org.assignment.domain.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,7 +68,7 @@ public class AuthController {
 			User user = new User();
 
 			// Copy data from form to entity
-			BeanUtils.copyProperties(authForm, user);
+			CopyProperties.copyProperties(authForm, user);
 
 			// Register user
 			userService.register(user);
@@ -75,11 +76,11 @@ public class AuthController {
 		} catch (Exception ex) {
 
 			// Message exception
-			model.addAttribute("message", ex.getMessage());
+			model.addAttribute(Messages.error().message(ex.getMessage()));
 			return REGISTER_PAGE_PATH;
 		}
 
-		redirectAttributes.addFlashAttribute("message", "register success");
+		redirectAttributes.addFlashAttribute(Messages.success().message("success.register"));
 		return REDIRECT_HOME_REQUEST;
 	}
 }

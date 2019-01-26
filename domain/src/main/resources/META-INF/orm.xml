@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm 
+	http://java.sun.com/xml/ns/persistence/orm_2_1.xsd"
+	version="2.1">
+
+	<sql-result-set-mapping name="beerDTO">
+		<constructor-result target-class="org.assignment.domain.dto.BeerDTO">
+			<column name="beerId" class="java.lang.Long" />
+			<column name="manufacturer" class="java.lang.String" />
+			<column name="name" class="java.lang.String" />
+			<column name="country" class="java.lang.String" />
+			<column name="description" class="java.lang.String" />
+			<column name="price" class="java.math.BigDecimal" />
+			<column name="isArchived" class="java.lang.Boolean" />
+			<column name="categoryName" class="java.lang.String" />
+		</constructor-result>
+	</sql-result-set-mapping>
+
+	<sql-result-set-mapping name="beerAvailableDTO">
+		<constructor-result target-class="org.assignment.domain.dto.BeerAvailableDTO">
+			<column name="beerId" class="java.lang.Long" />
+			<column name="manufacturer" class="java.lang.String" />
+			<column name="name" class="java.lang.String" />
+			<column name="country" class="java.lang.String" />
+			<column name="description" class="java.lang.String" />
+			<column name="price" class="java.math.BigDecimal" />
+			<column name="categoryName" class="java.lang.String" />
+		</constructor-result>
+	</sql-result-set-mapping>
+
+	<named-native-query name="Beer.getAllBeer" result-set-mapping="beerDTO">
+		<query>
+			SELECT 
+						b.beer_id AS beerId, 
+						b.manufacturer AS manufacturer, 
+						b.name AS name, 
+						b.country AS country,
+						b.description AS description, 
+						b.price AS price, 
+						b.is_archived as isArchived, 
+						c.name as categoryName 
+			FROM
+						beer b 
+			INNER JOIN category c 
+						ON b.category_id = c.category_id 
+			ORDER BY c.name, b.name
+		</query>
+	</named-native-query>
+
+	<named-native-query name="Beer.getBeerByStatus" result-set-mapping="beerAvailableDTO">
+		<query>
+			SELECT 
+						b.beer_id AS beerId, 
+						b.manufacturer AS manufacturer, 
+						b.name AS name, 
+						b.country AS country,
+						b.description AS description, 
+						b.price AS price, 
+						c.name as categoryName 
+			FROM
+						beer b 
+			INNER JOIN category c 
+						ON b.category_id = c.category_id
+			WHERE		b.is_archived = ?
+			ORDER BY c.name, b.name
+		</query>
+	</named-native-query>
+
+	<named-native-query name="Category.existAnyBeer">
+		<query>SELECT COUNT(1) FROM beer WHERE category_id = ?
+		</query>
+	</named-native-query>
+
+	<named-native-query name="Oauth.existClient" >
+		<query>SELECT COUNT(1) FROM oauth WHERE client_id = ? and client_secret = ?
+		</query>
+	</named-native-query>
+</entity-mappings>

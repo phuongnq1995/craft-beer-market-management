@@ -1,4 +1,4 @@
-package org.assignment.domain.service;
+package org.assignment.domain.service.impl;
 
 import java.util.Collection;
 import java.util.HashSet;

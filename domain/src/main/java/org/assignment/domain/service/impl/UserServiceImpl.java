@@ -1,4 +1,4 @@
-package org.assignment.domain.service;
+package org.assignment.domain.service.impl;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,6 +7,7 @@ import org.assignment.domain.entity.Role;
 import org.assignment.domain.entity.User;
 import org.assignment.domain.repository.RoleRepository;
 import org.assignment.domain.repository.UserRepository;
+import org.assignment.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

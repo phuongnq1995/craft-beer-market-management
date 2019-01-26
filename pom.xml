@@ -48,9 +48,9 @@
 		<org.lazyluke.version>0.2.7</org.lazyluke.version>
 
 		<!-- hibernate versions -->
-		<hibernate.version>5.1.2.Final</hibernate.version>
-		<hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
-		<hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
+		<hibernate.version>5.3.3.Final</hibernate.version>
+		<hibernate.jpa.version>1.1.1.Final</hibernate.jpa.version>
+		<hibernate-validator.version>5.3.3.Final</hibernate-validator.version>
 
 		<!-- jpa version -->
 		<spring-data-jpa.version>1.11.7.RELEASE</spring-data-jpa.version>
@@ -59,6 +59,10 @@
 		<jquery.version>3.1.1</jquery.version>
 		<bootstrap.version>3.3.7-1</bootstrap.version>
 		<font-awesome.version>4.7.0</font-awesome.version>
+
+		<!-- jackson versions -->
+		<jackson.version>2.6.3</jackson.version>
+		<nimbus-jose-jwt.version>4.20</nimbus-jose-jwt.version>
 
 		<!-- encoding build -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -269,6 +273,30 @@
 				<groupId>org.webjars</groupId>
 				<artifactId>jquery</artifactId>
 				<version>${jquery.version}</version>
+			</dependency>
+
+			<!-- jackson -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<!-- jwt -->
+			<dependency>
+				<groupId>com.nimbusds</groupId>
+				<artifactId>nimbus-jose-jwt</artifactId>
+				<version>${nimbus-jose-jwt.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

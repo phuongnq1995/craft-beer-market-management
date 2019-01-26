@@ -9,7 +9,7 @@
 	<div id="wrapper">
 		<h1>CSRF Error! Invalid CSRF Token!</h1>
 		<div class="error">
-			<c:if test="${!empty exceptionCode}">[${exceptionCode)]</c:if>
+			<c:if test="${!empty exceptionCode}">[${exceptionCode}]</c:if>
 			<spring:message code="e.xx.fw.7002" />
 		</div>
 	</div>

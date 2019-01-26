@@ -9,7 +9,7 @@ public enum MessageType {
 	SUCCESS("success"),
 	INFO("info"), 
 	WARNING("warning"), 
-	ERROR("error");
+	ERROR("danger");
 
 	private String value;
 

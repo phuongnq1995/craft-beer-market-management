@@ -1,5 +1,18 @@
 package org.assignment.domain.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * @author Phuongnq
+ * Token
+ */
+@Entity
+@Table(name = "token")
 public class Token extends BaseEntityAudit {
 
 	/**
@@ -7,36 +20,66 @@ public class Token extends BaseEntityAudit {
 	 */
 	private static final long serialVersionUID = 1653591646622965488L;
 
-	private String token;
+	@Id
+	private String value;
 
-	private String clientId;
+	@Column(name = "username")
+	private String username;
+
+	@Column(name = "expire_time")
+	private Date expireTime;
 
 	/**
-	 * @return the token
+	 * @return the value
 	 */
-	public String getToken() {
-		return token;
+	public String getValue() {
+		return value;
 	}
 
 	/**
-	 * @param token the token to set
+	 * @param value the value to set
 	 */
-	public void setToken(String token) {
-		this.token = token;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	/**
-	 * @return the clientId
+	 * @return the username
 	 */
-	public String getClientId() {
-		return clientId;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
-	 * @param clientId the clientId to set
+	 * @param username the username to set
 	 */
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return the expireTime
+	 */
+	public Date getExpireTime() {
+		return expireTime;
+	}
+
+	/**
+	 * @param expireTime the expireTime to set
+	 */
+	public void setExpireTime(Date expireTime) {
+		this.expireTime = expireTime;
+	}
+
+	public Token() {
+		super();
+	}
+
+	public Token(String value, String username, Date expireTime) {
+		super();
+		this.value = value;
+		this.username = username;
+		this.expireTime = expireTime;
 	}
 
 }

@@ -18,6 +18,7 @@
 		<!-- spring dependencies versions -->
 		<springframework.version>4.3.14.RELEASE</springframework.version>
 		<spring-security.version>4.2.4.RELEASE</spring-security.version>
+		<spring-security-oauth2.version>2.0.3.RELEASE</spring-security-oauth2.version>
 
 		<!-- postgresql versions -->
 		<postgresql.version>9.4.1212</postgresql.version>
@@ -112,6 +113,11 @@
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${spring-security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+				<version>${spring-security-oauth2.version}</version>
 			</dependency>
 
 			<!-- Spring data -->

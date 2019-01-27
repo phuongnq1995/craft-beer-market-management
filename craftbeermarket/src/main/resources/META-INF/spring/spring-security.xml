@@ -10,22 +10,29 @@
 	<!-- Disable secure resources -->
 	<sec:http pattern="/resources/**" security="none" />
 
+	<sec:http pattern="/api/**" create-session="stateless" auto-config="false" use-expressions="true"
+		entry-point-ref="restAuthenticationEntryPoint" >
+		<sec:csrf disabled="true" />
+		<sec:intercept-url pattern="/api/api-beer" access="hasRole('ROLE_CLIENT')" />
+		<sec:custom-filter ref="jwtAuthenticationFilter" before="PRE_AUTH_FILTER" />
+		<sec:access-denied-handler ref="customAccessDeniedHandler"/>
+	</sec:http>
+
 	<!-- Http security settings -->
-	<sec:http>
+	<sec:http authentication-manager-ref="authenticationManager">
 		<sec:form-login login-page="/auth/login" login-processing-url="/auth/login" default-target-url="/"
 			always-use-default-target="true" authentication-failure-handler-ref="authenticationFailureHandler" />
 		<sec:intercept-url pattern="/auth/login" access="isAnonymous()" />
-		<sec:intercept-url pattern="/api-beer" access="isAnonymous()" />
-		<sec:intercept-url pattern="/oauth/login" access="isAnonymous()" />
+
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 		<sec:logout logout-success-url="/auth/login" logout-url="/auth/logout" />
 		<sec:access-denied-handler ref="accessDeniedHandler" />
-		<sec:csrf disabled="true" />
+
 		<sec:session-management />
 	</sec:http>
 
 	<!-- Authentication manager process -->
-	<sec:authentication-manager>
+	<sec:authentication-manager id="authenticationManager">
 		<sec:authentication-provider user-service-ref="userDetailServiceImpl">
 			<sec:password-encoder ref="passwordEncoder" />
 		</sec:authentication-provider>
@@ -36,6 +43,14 @@
 		class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
 		<property name="defaultFailureUrl" value="/auth/login?error" />
 	</bean>
+
+	<bean id="restAuthenticationEntryPoint" class="org.assignment.app.security.RestAuthenticationEntryPoint" />
+
+	<bean id="jwtAuthenticationFilter" class="org.assignment.app.security.JwtAuthenticationFilter" >
+		<property name="authenticationManager" ref="authenticationManager" />
+	</bean>
+
+	<bean id="customAccessDeniedHandler" class="org.assignment.app.security.CustomAccessDeniedHandler" />
 
 	<!-- Password encoder -->
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

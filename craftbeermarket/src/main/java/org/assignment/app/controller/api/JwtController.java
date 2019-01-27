@@ -1,10 +1,7 @@
 package org.assignment.app.controller.api;
 
-import org.assignment.app.form.OauthForm;
-import org.assignment.common.CopyProperties;
-import org.assignment.domain.entity.Oauth;
+import org.assignment.app.form.ClientForm;
 import org.assignment.domain.service.JwtService;
-import org.assignment.domain.service.OauthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,27 +11,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author Phuongnq OauthController
+ * @author Phuongnq 
+ * JwtController
  */
 @Controller
-@RequestMapping(value = "oauth")
-public class OauthController {
+@RequestMapping(value = "api/oauth")
+public class JwtController {
 
 	@Autowired
 	JwtService jwtService;
 
-	@Autowired
-	OauthService oauthService;
-
+	/**
+	 * Get token
+	 * @param client - username and password
+	 * @return token
+	 */
 	@RequestMapping(value="login")
 	@ResponseBody
-	public ResponseEntity<String> getToken(@RequestBody OauthForm oauthForm) {
+	public ResponseEntity<String> generateToken(@RequestBody(required=true) ClientForm client) {
 		String result = "";
 		HttpStatus httpStatus = null;
-		Oauth oauth = new Oauth();
-		CopyProperties.copyProperties(oauthForm, oauth);
-		if (oauthService.checkExistClient(oauth)) {
-			result = jwtService.generateTokenLogin(oauth);
+
+		if (jwtService.checkExistUser(client.getUsername(), client.getPassword())) {
+			result = jwtService.generateTokenLogin(client.getUsername());
 			httpStatus = HttpStatus.OK;
 		} else {
 			result = "Wrong userId and password";

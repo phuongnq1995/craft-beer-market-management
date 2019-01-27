@@ -10,13 +10,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author Phuongnq
+ * RestBeerController
+ */
 @Controller
-@RequestMapping(value="api-beer")
+@RequestMapping(value="api/api-beer")
 public class RestBeerController {
 
 	@Autowired
 	BeerService beerService;
 
+	/**
+	 * getBeerAvailabel
+	 * @return list of beers available
+	 */
 	@RequestMapping
 	public @ResponseBody List<BeerAvailableDTO> getBeerAvailabel() {
 		// Get list of beers available

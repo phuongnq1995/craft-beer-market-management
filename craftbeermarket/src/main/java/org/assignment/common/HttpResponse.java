@@ -4,18 +4,22 @@ import org.springframework.http.HttpStatus;
 
 /**
  * @author phuongnq
- * ErrorResponse
+ * HttpResponse
  */
-public class ErrorResponse {
+public class HttpResponse {
 
 	private String message;
 
 	private int status;
 
-	public ErrorResponse(String message, HttpStatus status) {
+	public HttpResponse(String message, HttpStatus status) {
 		super();
 		this.message = message;
 		this.status = status.value();
+	}
+
+	public HttpResponse() {
+		
 	}
 
 	/**

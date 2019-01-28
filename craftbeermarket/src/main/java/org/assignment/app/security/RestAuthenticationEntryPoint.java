@@ -4,7 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.assignment.common.ErrorResponse;
+import org.assignment.common.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -32,7 +32,7 @@ public final class RestAuthenticationEntryPoint implements AuthenticationEntryPo
 	 * @throws JsonProcessingException
 	 */
 	private String messageResult() throws JsonProcessingException {
-		ErrorResponse error = new ErrorResponse("Access Denied !", HttpStatus.FORBIDDEN);
+		HttpResponse error = new HttpResponse("Access Denied !", HttpStatus.FORBIDDEN);
 		return new ObjectMapper().writeValueAsString(error);
 	}
 }

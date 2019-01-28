@@ -1,8 +1,6 @@
 package org.assignment.app.security;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -11,7 +9,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.assignment.common.ErrorResponse;
+import org.assignment.common.HttpResponse;
 import org.assignment.domain.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -48,30 +45,43 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String authToken = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);
+
+		// Check valid token
 		if (!jwtService.validateTokenLogin(authToken)) {
-			httpResponse.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
-			httpResponse.setStatus(HttpStatus.FORBIDDEN.value());
-			httpResponse.getWriter().write(messageResult());
+			setResponse(httpResponse);
 			return;
 		}
-
-		String username = jwtService.getUsernameFromToken(authToken);
-		if(username != null) {
-			UserDetails userDetail = userDetailsService.loadUserByUsername(username);
-			if (userDetail != null) {
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail,
-						null, userDetail.getAuthorities());
-				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-			}
-		}
-
+		setAuthentication(httpRequest);
 		chain.doFilter(request, response);
 	}
 
-	private String messageResult() throws JsonProcessingException {
-		ErrorResponse error = new ErrorResponse("Missing token or token invalid !", HttpStatus.FORBIDDEN);
-		return new ObjectMapper().writeValueAsString(error);
+	/**
+	 * Set Authentication
+	 * @param httpRequest
+	 */
+	private void setAuthentication(HttpServletRequest httpRequest) {
+		String authToken = httpRequest.getHeader(HttpHeaders.AUTHORIZATION);
+		String username = jwtService.getUsernameFromToken(authToken);
+		if(username == null) {
+			return;
+		}
+		UserDetails userDetail = userDetailsService.loadUserByUsername(username);
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail,
+				null, userDetail.getAuthorities());
+		authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+	}
+
+	/**
+	 * Message Result
+	 * @return
+	 * @throws IOException 
+	 */
+	private void setResponse(HttpServletResponse response) throws IOException {
+		HttpResponse error = new HttpResponse("Missing token or token invalid !", HttpStatus.FORBIDDEN);
+		response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		response.getWriter().write(new ObjectMapper().writeValueAsString(error));
 	}
 
 }

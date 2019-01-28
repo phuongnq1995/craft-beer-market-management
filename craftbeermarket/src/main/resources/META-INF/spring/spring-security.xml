@@ -15,10 +15,11 @@
 		entry-point-ref="restAuthenticationEntryPoint" >
 		<sec:csrf disabled="true" />
 		<sec:intercept-url pattern="/api/beer" access="permitAll" />
-		<sec:intercept-url pattern="/api/beer/consume" access="hasRole('ROLE_CUSTOMER')" />
+		<sec:intercept-url pattern="/api/customer/consume" access="hasRole('ROLE_CUSTOMER')" />
 		<sec:intercept-url pattern="/api/customer/register" access="isAnonymous()" />
 		<sec:intercept-url pattern="/api/customer/login" access="isAnonymous()" />
 		<sec:custom-filter ref="jwtAuthenticationFilter" before="PRE_AUTH_FILTER" />
+
 		<sec:access-denied-handler ref="customAccessDeniedHandler"/>
 	</sec:http>
 

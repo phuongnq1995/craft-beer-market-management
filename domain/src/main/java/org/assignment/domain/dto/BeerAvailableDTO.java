@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 public class BeerAvailableDTO {
 
-	private Long beerId;
-	private String manufacturer;
-	private String name;
-	private String country;
-	private String description;
-	private BigDecimal price;
-	private String categoryName;
+	protected Long beerId;
+	protected String manufacturer;
+	protected String name;
+	protected String country;
+	protected String description;
+	protected BigDecimal price;
+	protected String categoryName;
 
 	public BeerAvailableDTO(Long beerId, String manufacturer, String name, String country, String description,
 			BigDecimal price, String categoryName) {

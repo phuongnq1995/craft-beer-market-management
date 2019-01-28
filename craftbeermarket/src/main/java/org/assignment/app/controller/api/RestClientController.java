@@ -1,7 +1,7 @@
 package org.assignment.app.controller.api;
 
 import org.assignment.app.form.ClientForm;
-import org.assignment.common.ErrorResponse;
+import org.assignment.common.HttpResponse;
 import org.assignment.domain.service.JwtService;
 import org.assignment.domain.util.TokenType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class RestClientController {
 			result = jwtService.generateToken(client.getClientId(), TokenType.CLIENT);
 			httpStatus = HttpStatus.OK;
 		} else {
-			result = new ErrorResponse("Wrong userId and password", HttpStatus.BAD_REQUEST);
+			result = new HttpResponse("Wrong userId and password", HttpStatus.BAD_REQUEST);
 			httpStatus = HttpStatus.BAD_REQUEST;
 		}
 		return new ResponseEntity<>(result, httpStatus);

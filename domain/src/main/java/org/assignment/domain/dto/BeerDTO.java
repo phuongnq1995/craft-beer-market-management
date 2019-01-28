@@ -7,27 +7,14 @@ import java.math.BigDecimal;
  * BeerModel
  */
 
-public class BeerDTO {
+public class BeerDTO extends BeerAvailableDTO {
 
-	private Long beerId;
-	private String manufacturer;
-	private String name;
-	private String country;
-	private String description;
-	private BigDecimal price;
 	private Boolean isArchived;
-	private String categoryName;
 
 	public BeerDTO(Long beerId, String manufacturer, String name, String country, String description,
 			BigDecimal price, Boolean isArchived, String categoryName) {
-		this.beerId = beerId;
-		this.manufacturer = manufacturer;
-		this.name = name;
-		this.country = country;
-		this.description = description;
-		this.price = price;
+		super(beerId, manufacturer, name, country, description, price, categoryName);
 		this.isArchived = isArchived;
-		this.categoryName = categoryName;
 	}
 
 	/**

@@ -3,7 +3,6 @@ package org.assignment.domain.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import org.assignment.domain.entity.Token;
 import org.springframework.security.crypto.codec.Hex;
 
 /**
@@ -14,11 +13,13 @@ public final class TokenUtils {
 
 	public static final String SECRET_KEY = "oauth_craft_beer_market_secret_key_256_bit";
 
-	public static final int EXPIRE_TIME = 300000;
+	public static final int EXPIRE_TIME = 3600000;
+
+	public final static String AUTHENTICATION_TYPE = "Bearer";
 
 	/**
 	 * Generate expiration date
-	 * @return Date after five minites
+	 * @return Date after 1 hour
 	 */
 	public static Date generateExpirationDate() {
 		return new Date(System.currentTimeMillis() + EXPIRE_TIME);
@@ -49,11 +50,20 @@ public final class TokenUtils {
 	 * @param token
 	 * @return true if valid else false
 	 */
-	public static boolean validateTokenLogin(Token token) {
-		if(token == null) {
+	public static boolean validateExpirationDate(Date date) {
+		if(date == null || date.before(new Date())) {
 			return false;
 		}
-		if(token.getExpireTime().before(new Date())) {
+		return true;
+	}
+
+	/**
+	 * isValidateTokenFormat
+	 * @param tokenValue
+	 * @return true if valid else false
+	 */
+	public static boolean isValidateTokenFormat(String tokenValue) {
+		if(tokenValue == null || tokenValue.isEmpty()) {
 			return false;
 		}
 		return true;

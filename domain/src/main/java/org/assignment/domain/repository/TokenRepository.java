@@ -1,6 +1,7 @@
 package org.assignment.domain.repository;
 
 import org.assignment.domain.entity.Token;
+import org.assignment.domain.util.TokenType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,12 +17,13 @@ public interface TokenRepository extends JpaRepository<Token, String>{
 	 * @return username
 	 */
 	@Query(nativeQuery=true)
-	String getUsernameFromToken(String tokenValue);
+	String getUsernameFromToken(String tokenValue, String type);
 
 	/**
-	 * Delete token by username
-	 * @param username
+	 * Delete By Username And Type
+	 * @param username - The username
+	 * @param type - TokenType
 	 */
-	void deleteByUsername(String username);
+	void deleteByOwnerAndType(String owner, TokenType type);
 
 }

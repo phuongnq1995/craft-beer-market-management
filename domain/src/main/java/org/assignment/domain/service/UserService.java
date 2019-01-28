@@ -9,10 +9,10 @@ import org.assignment.domain.entity.User;
 public interface UserService {
 
 	/**
-	 * Register new user
+	 * Register new user admin
 	 * @param user - User information
 	 */
-	void register(User user);
+	void registerAdmin(User user);
 
 	/**
 	 * Check exists user
@@ -21,4 +21,9 @@ public interface UserService {
 	 */
 	boolean exists(String username);
 
+	/**
+	 * Register customer
+	 * @param user
+	 */
+	void registerCustomer(User user);
 }

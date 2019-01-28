@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.assignment.common.BeerStatus;
 import org.assignment.domain.dto.BeerAvailableDTO;
+import org.assignment.domain.model.UserCustomDetails;
 import org.assignment.domain.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * RestBeerController
  */
 @Controller
-@RequestMapping(value="api/api-beer")
+@RequestMapping(value="api/beer")
 public class RestBeerController {
 
 	@Autowired
@@ -26,9 +28,9 @@ public class RestBeerController {
 	 * @return list of beers available
 	 */
 	@RequestMapping
-	public @ResponseBody List<BeerAvailableDTO> getBeerAvailabel() {
+	public @ResponseBody List<BeerAvailableDTO> getBeerAvailabel(@AuthenticationPrincipal UserCustomDetails user) {
 		// Get list of beers available
-		List<BeerAvailableDTO> listBeers = beerService.getBeerByStatus(BeerStatus.AVAILABLE.getValue());
+		List<BeerAvailableDTO> listBeers = beerService.getBeerByStatus(BeerStatus.AVAILABLE.getValue(), user);
 		return listBeers;
 	}
 

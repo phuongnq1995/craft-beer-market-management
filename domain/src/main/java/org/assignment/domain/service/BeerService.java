@@ -5,6 +5,7 @@ import java.util.List;
 import org.assignment.domain.dto.BeerAvailableDTO;
 import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Phuongnq
@@ -40,8 +41,9 @@ public interface BeerService {
 	/**
 	 * getBeerByStatus
 	 * @param isArchived - Boolean
+	 * @param user 
 	 * @return isArchived
 	 */
-	List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived);
+	List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived, UserDetails user);
 
 }

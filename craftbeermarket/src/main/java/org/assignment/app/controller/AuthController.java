@@ -71,7 +71,7 @@ public class AuthController {
 			CopyProperties.copyProperties(authForm, user);
 
 			// Register user
-			userService.register(user);
+			userService.registerAdmin(user);
 
 		} catch (Exception ex) {
 

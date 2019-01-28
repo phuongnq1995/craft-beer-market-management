@@ -3,8 +3,14 @@ package org.assignment.app.security;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.assignment.common.ErrorResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Phuongnq
@@ -17,7 +23,16 @@ public final class RestAuthenticationEntryPoint implements AuthenticationEntryPo
 	 */
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException {
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		response.getWriter().write("Missing or invalid token !");
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		response.getWriter().write(messageResult());
+	}
+
+	/**
+	 * @return messageResult
+	 * @throws JsonProcessingException
+	 */
+	private String messageResult() throws JsonProcessingException {
+		ErrorResponse error = new ErrorResponse("Access Denied !", HttpStatus.FORBIDDEN);
+		return new ObjectMapper().writeValueAsString(error);
 	}
 }

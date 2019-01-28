@@ -1,20 +1,28 @@
-package org.assignment.app.form;
+package org.assignment.domain.entity;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Phuongnq
- * ClientForm
+ * Client
  */
-public class ClientForm implements Serializable {
+@Entity
+@Table(name = "client")
+public class Client extends BaseEntityAudit {
 
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = -6666761231305653550L;
+	private static final long serialVersionUID = 7938986767441217347L;
 
+	@Id
+	@Column(name = "client_id")
 	private String clientId;
 
+	@Column(name = "client_secret")
 	private String clientSecret;
 
 	/**
@@ -44,4 +52,5 @@ public class ClientForm implements Serializable {
 	public void setClientSecret(String clientSecret) {
 		this.clientSecret = clientSecret;
 	}
+
 }

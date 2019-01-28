@@ -8,6 +8,7 @@ import org.assignment.domain.entity.Beer;
 import org.assignment.domain.repository.BeerRepository;
 import org.assignment.domain.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +40,7 @@ public class BeerServiceImpl implements BeerService {
 	 * @see org.assignment.domain.service.BeerService#getBeerByStatus(java.lang.Boolean)
 	 */
 	@Override
-	public List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived) {
+	public List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived, UserDetails user) {
 		return beerRepository.getBeerByStatus(isArchived);
 	}
 

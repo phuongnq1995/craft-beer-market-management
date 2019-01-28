@@ -1,5 +1,8 @@
 package org.assignment.domain.service;
 
+import org.assignment.domain.model.TokenInfo;
+import org.assignment.domain.util.TokenType;
+
 /**
  * @author Phuongnq
  * JwtService
@@ -8,10 +11,10 @@ public interface JwtService {
 
 	/**
 	 * generateTokenLogin
-	 * @param user
-	 * @return String
+	 * @param name
+	 * @return TokenInfo
 	 */
-	String generateTokenLogin(String username);
+	TokenInfo generateToken(String clientId, TokenType type);
 
 	/**
 	 * Validate token login
@@ -28,11 +31,11 @@ public interface JwtService {
 	String getUsernameFromToken(String token);
 
 	/**
-	 * Check exist user
-	 * @param username - The username
-	 * @param passwordRaw - the password
+	 * Check exist client
+	 * @param clientId - The clientId
+	 * @param clientSecret - the clientSecret
 	 * @return true if exist else false
 	 */
-	public boolean checkExistUser(String username, String passwordRaw);
+	public boolean checkExistClient(String clientId, String clientSecret);
 
 }

@@ -9,11 +9,15 @@
 
 	<!-- Disable secure resources -->
 	<sec:http pattern="/resources/**" security="none" />
+	<sec:http pattern="/api/client/login" security="none" />
 
 	<sec:http pattern="/api/**" create-session="stateless" auto-config="false" use-expressions="true"
 		entry-point-ref="restAuthenticationEntryPoint" >
 		<sec:csrf disabled="true" />
-		<sec:intercept-url pattern="/api/api-beer" access="hasRole('ROLE_CLIENT')" />
+		<sec:intercept-url pattern="/api/beer" access="permitAll" />
+		<sec:intercept-url pattern="/api/beer/consume" access="hasRole('ROLE_CUSTOMER')" />
+		<sec:intercept-url pattern="/api/customer/register" access="isAnonymous()" />
+		<sec:intercept-url pattern="/api/customer/login" access="isAnonymous()" />
 		<sec:custom-filter ref="jwtAuthenticationFilter" before="PRE_AUTH_FILTER" />
 		<sec:access-denied-handler ref="customAccessDeniedHandler"/>
 	</sec:http>

@@ -1,10 +1,16 @@
 package org.assignment.domain.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.assignment.domain.entity.Client;
 import org.assignment.domain.entity.Token;
-import org.assignment.domain.entity.User;
+import org.assignment.domain.model.TokenInfo;
+import org.assignment.domain.repository.ClientRepository;
 import org.assignment.domain.repository.TokenRepository;
 import org.assignment.domain.repository.UserRepository;
 import org.assignment.domain.service.JwtService;
+import org.assignment.domain.util.TokenType;
 import org.assignment.domain.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class JwtServiceImpl implements JwtService {
 
+	public static final String DATE_FORMAT = "dd/MM/yyyy hh:mm:ss";
+
 	@Autowired
 	TokenRepository tokenRepository;
 
@@ -26,31 +34,34 @@ public class JwtServiceImpl implements JwtService {
 	UserRepository userRepository;
 
 	@Autowired
+	ClientRepository clientRepository;
+
+	@Autowired
 	PasswordEncoder encoder;
 
 	/* (non-Javadoc)
-	 * @see org.assignment.domain.service.JwtService#generateTokenLogin(java.lang.String)
+	 * @see org.assignment.domain.service.JwtService#generateTokenClient(java.lang.String)
 	 */
 	@Override
-	public String generateTokenLogin(String username) {
+	public TokenInfo generateToken(String clientId, TokenType type) {
+		String tokenValue = TokenUtils.generateToken(clientId);
+		Date expirationDate = TokenUtils.generateExpirationDate();
+		Token token = new Token(tokenValue, clientId, expirationDate, type);
 
-		String tokenValue = TokenUtils.generateToken(username);
-
-		Token token = new Token(tokenValue, username, TokenUtils.generateExpirationDate());
-
-		tokenRepository.deleteByUsername(username);
+		tokenRepository.deleteByOwnerAndType(clientId, type);
 		tokenRepository.save(token);
 
-		return tokenValue;
+		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+		return new TokenInfo(tokenValue, formatter.format(expirationDate));
 	}
 
 	/* (non-Javadoc)
 	 * @see org.assignment.domain.service.JwtService#checkExistClient(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean checkExistUser(String username, String passwordRaw) {
-		User user = userRepository.findOne(username);
-		if(user == null || !encoder.matches(passwordRaw, user.getPassword())) {
+	public boolean checkExistClient(String clientId, String clientSecret) {
+		Client client = clientRepository.findByClientIdAndClientSecret(clientId, clientSecret);
+		if(client == null) {
 			return false;
 		}
 		return true;
@@ -61,11 +72,14 @@ public class JwtServiceImpl implements JwtService {
 	 */
 	@Override
 	public boolean validateTokenLogin(String tokenValue) {
-		if(tokenValue == null || tokenValue.isEmpty()) {
+		if(!TokenUtils.isValidateTokenFormat(tokenValue)){
 			return false;
 		}
 		Token token = tokenRepository.findOne(tokenValue);
-		return TokenUtils.validateTokenLogin(token);
+		if(token == null) {
+			return false;
+		}
+		return TokenUtils.validateExpirationDate(token.getExpireTime());
 	}
 
 	/* (non-Javadoc)
@@ -73,6 +87,7 @@ public class JwtServiceImpl implements JwtService {
 	 */
 	@Override
 	public String getUsernameFromToken(String tokenValue) {
-		return tokenRepository.getUsernameFromToken(tokenValue);
+		return tokenRepository.getUsernameFromToken(tokenValue, String.valueOf(TokenType.CUSTOMER));
 	}
+
 }

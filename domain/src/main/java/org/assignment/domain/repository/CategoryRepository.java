@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 	@Query(nativeQuery=true)
-	Integer existAnyBeer(Long categoryId);
+	Boolean existAnyBeer(Long categoryId);
 
 }

@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 */
 	@Override
 	public void delete(Long categoryId) throws Exception {
-		if(categoryRepository.existAnyBeer(categoryId) == 1) {
+		if(categoryRepository.existAnyBeer(categoryId)) {
 			throw new Exception("need to delete all of beer in this category");
 		}
 		categoryRepository.delete(categoryId);

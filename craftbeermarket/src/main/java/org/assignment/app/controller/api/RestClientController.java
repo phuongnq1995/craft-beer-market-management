@@ -1,13 +1,16 @@
 package org.assignment.app.controller.api;
 
 import org.assignment.app.form.ClientForm;
+import org.assignment.common.ErrorResponse;
 import org.assignment.domain.service.JwtService;
+import org.assignment.domain.util.TokenType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -15,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * JwtController
  */
 @Controller
-@RequestMapping(value = "api/oauth")
-public class JwtController {
+@RequestMapping(value = "api/client")
+public class RestClientController {
 
 	@Autowired
 	JwtService jwtService;
@@ -26,19 +29,20 @@ public class JwtController {
 	 * @param client - username and password
 	 * @return token
 	 */
-	@RequestMapping(value="login")
+	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> generateToken(@RequestBody(required=true) ClientForm client) {
-		String result = "";
-		HttpStatus httpStatus = null;
+	public ResponseEntity<Object> generateToken(@RequestBody(required=true) ClientForm client) {
 
-		if (jwtService.checkExistUser(client.getUsername(), client.getPassword())) {
-			result = jwtService.generateTokenLogin(client.getUsername());
+		HttpStatus httpStatus = null;
+		Object result = null;
+
+		if (jwtService.checkExistClient(client.getClientId(), client.getClientSecret())) {
+			result = jwtService.generateToken(client.getClientId(), TokenType.CLIENT);
 			httpStatus = HttpStatus.OK;
 		} else {
-			result = "Wrong userId and password";
-			httpStatus = HttpStatus.BAD_REQUEST;	
+			result = new ErrorResponse("Wrong userId and password", HttpStatus.BAD_REQUEST);
+			httpStatus = HttpStatus.BAD_REQUEST;
 		}
-		return new ResponseEntity<String>(result, httpStatus);
+		return new ResponseEntity<>(result, httpStatus);
 	}
 }

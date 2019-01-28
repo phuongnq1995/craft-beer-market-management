@@ -69,10 +69,10 @@
 	</named-native-query>
 
 	<named-native-query name="Category.existAnyBeer">
-		<query>SELECT COUNT(1) FROM beer WHERE category_id = ?</query>
+		<query>SELECT EXISTS(SELECT 1 FROM beer WHERE category_id = ? LIMIT 1)</query>
 	</named-native-query>
 
 	<named-native-query name="Token.getUsernameFromToken" >
-		<query>SELECT username FROM token WHERE value = ?</query>
+		<query>SELECT owner FROM token WHERE value = ? AND type = ?</query>
 	</named-native-query>
 </entity-mappings>

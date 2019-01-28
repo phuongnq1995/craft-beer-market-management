@@ -4,8 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.assignment.domain.util.TokenType;
 
 /**
  * @author Phuongnq
@@ -23,11 +27,15 @@ public class Token extends BaseEntityAudit {
 	@Id
 	private String value;
 
-	@Column(name = "username")
-	private String username;
+	@Column(name = "owner")
+	private String owner;
 
 	@Column(name = "expire_time")
 	private Date expireTime;
+
+	@Column(name = "type")
+	@Enumerated(EnumType.STRING)
+	private TokenType type;
 
 	/**
 	 * @return the value
@@ -44,17 +52,17 @@ public class Token extends BaseEntityAudit {
 	}
 
 	/**
-	 * @return the username
+	 * @return the owner
 	 */
-	public String getUsername() {
-		return username;
+	public String getOwner() {
+		return owner;
 	}
 
 	/**
-	 * @param username the username to set
+	 * @param owner the owner to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 
 	/**
@@ -75,11 +83,26 @@ public class Token extends BaseEntityAudit {
 		super();
 	}
 
-	public Token(String value, String username, Date expireTime) {
+	/**
+	 * @return the type
+	 */
+	public TokenType getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(TokenType type) {
+		this.type = type;
+	}
+
+	public Token(String value, String owner, Date expireTime, TokenType type) {
 		super();
 		this.value = value;
-		this.username = username;
+		this.owner = owner;
 		this.expireTime = expireTime;
+		this.type = type;
 	}
 
 }

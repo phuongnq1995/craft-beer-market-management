@@ -8,6 +8,7 @@ import org.assignment.domain.entity.User;
 import org.assignment.domain.repository.RoleRepository;
 import org.assignment.domain.repository.UserRepository;
 import org.assignment.domain.service.UserService;
+import org.assignment.domain.util.ApplicationRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	private static final String ADMIN_ROLE_NAME = "ROLE_ADMIN";
-
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -35,10 +34,30 @@ public class UserServiceImpl implements UserService {
 	/* (non-Javadoc)
 	 * @see org.assignment.domain.service.UserService#register(org.assignment.domain.entity.User)
 	 */
-	public void register(User user) {
+	public void registerAdmin(User user) {
+		registerUser(user, ApplicationRole.ADMIN_ROLE);
+	}
+
+	public void registerCustomer(User user) {
+		registerUser(user, ApplicationRole.ROLE_CUSTOMER);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.UserService#exists(java.lang.String)
+	 */
+	public boolean exists(String username) {
+		return userRepository.exists(username);
+	}
+
+	/**
+	 * Register User
+	 * @param user
+	 * @param roleName
+	 */
+	private void registerUser(User user, ApplicationRole roleName) {
 
 		// Select role by admin's role name
-		Role role = roleRepository.findByName(ADMIN_ROLE_NAME);
+		Role role = roleRepository.findByName(String.valueOf(roleName));
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(role);
 
@@ -51,12 +70,4 @@ public class UserServiceImpl implements UserService {
 		// omitted
 		userRepository.save(user);
 	}
-
-	/* (non-Javadoc)
-	 * @see org.assignment.domain.service.UserService#exists(java.lang.String)
-	 */
-	public boolean exists(String username) {
-		return userRepository.exists(username);
-	}
-
 }

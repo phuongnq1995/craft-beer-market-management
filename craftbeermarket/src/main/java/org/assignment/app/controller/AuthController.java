@@ -46,16 +46,32 @@ public class AuthController {
 		return new AuthForm();
 	}
 
+	/**
+	 * Display login page
+	 * @return LOGIN_PAGE_PATH
+	 */
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login() {
+	public String displayLogin() {
 		return LOGIN_PAGE_PATH;
 	}
 
+	/**
+	 * Display register page
+	 * @return REGISTER_PAGE_PATH
+	 */
 	@RequestMapping(value = "register", method = RequestMethod.GET)
-	public String register() {
+	public String displayRegister() {
 		return REGISTER_PAGE_PATH;
 	}
 
+	/**
+	 * Process registration
+	 * @param authForm
+	 * @param bindingResult
+	 * @param model
+	 * @param redirectAttributes
+	 * @return Register page if has error else index page
+	 */
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String processRegistration(@Validated AuthForm authForm, BindingResult bindingResult, Model model,
 			RedirectAttributes redirectAttributes) {

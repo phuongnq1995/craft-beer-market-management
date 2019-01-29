@@ -89,7 +89,7 @@
 						</tr>
 					</table>
 					<button type="submit" class="btn btn-success pull-right">
-						<spring:message code="labels.button.create" />
+						<spring:message code="labels.button.update" />
 					</button>
 				</div>
 			</div>

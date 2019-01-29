@@ -1,12 +1,19 @@
 package org.assignment.domain.dto;
 
 /**
- * @author Phuongnq Passport
+ * @author Phuongnq 
+ * HistoryDTO
  */
-public class Passport {
+public class HistoryDTO {
 
 	private String beerName;
 	private String consumedAt;
+
+	public HistoryDTO(String beerName, String consumedAt) {
+		super();
+		this.beerName = beerName;
+		this.consumedAt = consumedAt;
+	}
 
 	/**
 	 * @return the beerName

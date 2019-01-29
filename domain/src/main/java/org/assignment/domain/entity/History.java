@@ -28,7 +28,7 @@ public class History extends BaseEntityAudit {
 	@Column(name="username")
 	private String username;
 
-	@Column(name="beerId")
+	@Column(name="beer_id")
 	private Long beerId;
 
 	/**

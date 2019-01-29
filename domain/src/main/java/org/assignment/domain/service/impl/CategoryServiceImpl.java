@@ -51,8 +51,12 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @see org.assignment.domain.service.CategoryService#findByCategoryId(java.lang.Long)
 	 */
 	@Override
-	public Category findByCategoryId(Long categoryId) {
-		return categoryRepository.findOne(categoryId);
+	public Category findByCategoryId(Long categoryId) throws Exception {
+		Category category = categoryRepository.findOne(categoryId);
+		if(category == null) {
+			throw new Exception("Not found.");
+		}
+		return category;
 	}
 
 }

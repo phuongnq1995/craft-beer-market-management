@@ -20,7 +20,16 @@ public interface CustomerService {
 	/**
 	 * Add history
 	 * @param history
+	 * @return History
 	 */
-	void addHistory(History history);
+	History addHistory(History history);
+
+	/**
+	 * Check exist customer
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	boolean checkExistCustomer(String username, String password);
 
 }

@@ -29,15 +29,29 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	HistoryRepository historyRepository;
 
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.CustomerService#register(org.assignment.domain.entity.User)
+	 */
 	@Override
 	public TokenInfo register(User user) {
 		userService.registerCustomer(user);
 		return jwtService.generateToken(user.getUsername(), TokenType.CUSTOMER);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.CustomerService#addHistory(org.assignment.domain.entity.History)
+	 */
 	@Override
-	public void addHistory(History history) {
-		historyRepository.save(history);
+	public History addHistory(History history) {
+		return historyRepository.save(history);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.CustomerService#checkExistCustomer(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean checkExistCustomer(String username, String password) {
+		return userService.checkExistUser(username, password);
 	}
 
 }

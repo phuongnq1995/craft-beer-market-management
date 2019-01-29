@@ -5,7 +5,7 @@ import org.springframework.beans.BeansException;
 
 /**
  * @author Phuongnq
- * CopyField
+ * CopyProperties
  */
 public abstract class CopyProperties {
 

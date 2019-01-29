@@ -6,6 +6,6 @@ package org.assignment.domain.util;
  */
 public enum ApplicationRole {
 
-	ADMIN_ROLE, ROLE_CUSTOMER
+	ROLE_ADMIN, ROLE_CUSTOMER
 
 }

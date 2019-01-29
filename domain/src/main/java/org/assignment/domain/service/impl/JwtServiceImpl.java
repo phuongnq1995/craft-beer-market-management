@@ -8,7 +8,6 @@ import org.assignment.domain.entity.Token;
 import org.assignment.domain.model.TokenInfo;
 import org.assignment.domain.repository.ClientRepository;
 import org.assignment.domain.repository.TokenRepository;
-import org.assignment.domain.repository.UserRepository;
 import org.assignment.domain.service.JwtService;
 import org.assignment.domain.util.TokenType;
 import org.assignment.domain.util.TokenUtils;
@@ -29,9 +28,6 @@ public class JwtServiceImpl implements JwtService {
 
 	@Autowired
 	TokenRepository tokenRepository;
-
-	@Autowired
-	UserRepository userRepository;
 
 	@Autowired
 	ClientRepository clientRepository;

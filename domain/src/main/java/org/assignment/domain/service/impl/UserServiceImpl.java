@@ -35,9 +35,12 @@ public class UserServiceImpl implements UserService {
 	 * @see org.assignment.domain.service.UserService#register(org.assignment.domain.entity.User)
 	 */
 	public void registerAdmin(User user) {
-		registerUser(user, ApplicationRole.ADMIN_ROLE);
+		registerUser(user, ApplicationRole.ROLE_ADMIN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.UserService#registerCustomer(org.assignment.domain.entity.User)
+	 */
 	public void registerCustomer(User user) {
 		registerUser(user, ApplicationRole.ROLE_CUSTOMER);
 	}
@@ -47,6 +50,23 @@ public class UserServiceImpl implements UserService {
 	 */
 	public boolean exists(String username) {
 		return userRepository.exists(username);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.assignment.domain.service.UserService#checkExistUser(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean checkExistUser(String username, String password) {
+
+		if(username == null || username.isEmpty()) {
+			return false;
+		}
+
+		User user = userRepository.findOne(username);
+		if(user == null || !passwordEncoder.matches(password, user.getPassword())) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -70,4 +90,5 @@ public class UserServiceImpl implements UserService {
 		// omitted
 		userRepository.save(user);
 	}
+
 }

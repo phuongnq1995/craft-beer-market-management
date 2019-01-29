@@ -1,5 +1,7 @@
 package org.assignment.common;
 
+import org.assignment.app.constant.MessageType;
+
 /**
  * @author phuongnq 
  * Messages

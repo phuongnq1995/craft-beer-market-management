@@ -17,7 +17,7 @@
 
 					<div class="form-group">
 						<label for="username"><spring:message code="labels.user.username" /></label> <input type="text"
-							id="username" name="username" class="form-control" placeholder="Email address" required autofocus />
+							id="username" name="username" class="form-control" placeholder="Username" required autofocus />
 					</div>
 
 					<div class="form-group">

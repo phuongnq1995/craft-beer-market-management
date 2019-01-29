@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+
+	<sql-result-set-mapping name="historyDTO">
+		<constructor-result target-class="org.assignment.domain.dto.HistoryDTO">
+			<column name="beerName" class="java.lang.String" />
+			<column name="consumedAt" class="java.lang.String" />
+		</constructor-result>
+	</sql-result-set-mapping>
+
+	<named-native-query name="History.findHistoryByUser" result-set-mapping="historyDTO">
+		<query> SELECT	b.name	AS	beerName,
+						TO_CHAR(h.created_at, 'dd/MM/yyyy HH24:MI:SS')	AS	consumedAt
+				FROM	history h
+				LEFT JOIN	beer b 
+				ON  		b.beer_id = h.beer_id
+				WHERE		h.username = ?
+				ORDER BY 	h.created_at DESC
+		</query>
+	</named-native-query>
+
+</entity-mappings>

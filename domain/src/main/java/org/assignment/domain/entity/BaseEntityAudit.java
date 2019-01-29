@@ -9,7 +9,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;  
 import javax.persistence.Temporal;  
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;  
+import javax.persistence.Version;
+import javax.validation.constraints.Size;
+
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;  
 
 /**
  * @author phuongnq 
@@ -22,60 +27,34 @@ public abstract class BaseEntityAudit implements Serializable {
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String AUTHOR_WEB_API = "WEB-API";
 
 	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
+	protected Date createdAt;
 
 	@Size(max = 20)
 	@Column(name = "created_by", length = 20)
-	private String createdBy;
+	protected String createdBy;
 
 	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
+	protected Date updatedAt;
 
 	@Size(max = 20)
 	@Column(name = "updated_by", length = 20)
-	private String updatedBy;
+	protected String updatedBy;
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
+	@Version
+	@Column(name="version")
+	protected Integer version;
 
 	/**
 	 * Sets createdAt before insert
 	 */
 	@PrePersist
 	public void setCreationDate() {
+		this.createdBy = getUserLogged();
 		this.createdAt = new Date();
 	}
 
@@ -84,6 +63,92 @@ public abstract class BaseEntityAudit implements Serializable {
 	 */
 	@PreUpdate
 	public void setChangeDate() {
+		this.updatedBy = getUserLogged();
 		this.updatedAt = new Date();
 	}
+
+	/**
+	 * @return current user logged
+	 */
+	private String getUserLogged() {
+		// Get user logged
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		// if non-user logged
+		if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+			return AUTHOR_WEB_API;
+		}
+		return authentication.getName();
+	}
+
+	/**
+	 * @return the createdAt
+	 */
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	/**
+	 * @return the createdBy
+	 */
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	/**
+	 * @return the updatedAt
+	 */
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
+	 * @param updatedAt the updatedAt to set
+	 */
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * @return the updatedBy
+	 */
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	/**
+	 * @param updatedBy the updatedBy to set
+	 */
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	/**
+	 * @param createdAt the createdAt to set
+	 */
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	/**
+	 * @return the version
+	 */
+	public Integer getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 }

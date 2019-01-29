@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	private static final String HOME_REQUEST = "/";
 	private static final String HOME_PATH = "home/homepage";
 
 	/**
 	 * Handle root request
 	 * @return HOME_PATH
 	 */
-	@RequestMapping(value = HOME_REQUEST)
+	@RequestMapping(value = "/")
 	public String home(Model model) {
 		return HOME_PATH;
 	}

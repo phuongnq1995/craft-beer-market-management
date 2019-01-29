@@ -1,4 +1,4 @@
-package org.assignment.common;
+package org.assignment.app.constant;
 
 /**
  * @author Phuongnq 

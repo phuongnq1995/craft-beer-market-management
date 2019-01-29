@@ -39,7 +39,7 @@ public class User extends BaseEntityAudit {
 	@Column(name="login_failure_count")
 	private Integer loginFailureCount = 0;
 
-	@ManyToMany(cascade=CascadeType.PERSIST)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "username"), 
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;

@@ -19,11 +19,12 @@
 		<property name="packagesToScan" value="org.assignment.domain.entity" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="persistenceUnitName" value="persistenceUnit" />
 		<property name="jpaPropertyMap">
 			<util:map>
 				<entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
-				<entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}" />
 				<entry key="hibernate.dialect" value="${hibernate.dialect}" />
+				<entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}" /> 
 				<entry key="hibernate.temp.use_jdbc_metadata_defaults" value="${hibernate.temp.use_jdbc_metadata_defaults}" />
 				<entry key="hibernate.connection.charSet" value="${hibernate.connection.charSet}" />
 				<entry key="hibernate.show_sql" value="${hibernate.show_sql}" />
@@ -31,6 +32,7 @@
 				<entry key="hibernate.use_sql_comments" value="${hibernate.use_sql_comments}" />
 				<entry key="hibernate.jdbc.batch_size" value="${hibernate.jdbc.batch_size}" />
 				<entry key="hibernate.jdbc.fetch_size" value="${hibernate.jdbc.fetch_size}" />
+				<entry key="hibernate.jdbc.batch_versioned_data" value="${hibernate.jdbc.batch_versioned_data}" />
 			</util:map>
 		</property>
 	</bean>

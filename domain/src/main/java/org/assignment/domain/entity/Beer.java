@@ -21,7 +21,7 @@ public class Beer extends BaseEntityAudit {
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = -5823708872964400506L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

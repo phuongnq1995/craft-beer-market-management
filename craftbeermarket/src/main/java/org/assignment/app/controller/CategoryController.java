@@ -108,13 +108,20 @@ public class CategoryController {
 	 * @param categoryForm
 	 * @param model
 	 * @return update page
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "update/{categoryId}", method = RequestMethod.GET)
 	public String displayUpdate(@PathVariable("categoryId") Long categoryId, CategoryForm categoryForm, Model model) {
-		Category category = categoryService.findByCategoryId(categoryId);
+		try {
+			Category category = categoryService.findByCategoryId(categoryId);
+	
+			CopyProperties.copyProperties(category, categoryForm);
+		} catch (Exception ex) {
 
-		CopyProperties.copyProperties(category, categoryForm);
-
+			// Message exception
+			model.addAttribute(Messages.error().message(ex.getMessage()));
+			return UPDATE_PAGE_PATH;
+		}
 		return UPDATE_PAGE_PATH;
 	}
 
@@ -125,10 +132,11 @@ public class CategoryController {
 	 * @param model
 	 * @param redirectAttributes
 	 * @return UPDATE_PAGE_PATH if has error else REDIRECT_INDEX_REQUEST
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String processUpdate(@Validated CategoryForm categoryForm, BindingResult bindingResult, Model model,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes) throws Exception {
 
 		// If form has errors
 		if (bindingResult.hasErrors()) {
@@ -136,7 +144,7 @@ public class CategoryController {
 		}
 
 		try {
-			Category category = new Category();
+			Category category = categoryService.findByCategoryId(categoryForm.getCategoryId());
 
 			// Copy data from form to entity
 			CopyProperties.copyProperties(categoryForm, category);

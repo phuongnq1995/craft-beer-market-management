@@ -1,4 +1,6 @@
-package org.assignment.app.form.api;
+package org.assignment.app.form;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author phuongnq
@@ -6,6 +8,7 @@ package org.assignment.app.form.api;
  */
 public class ConsumeForm {
 
+	@NotNull(message="comsume.notnull.beerId")
 	private Long beerId;
 
 	/**

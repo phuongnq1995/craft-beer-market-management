@@ -2,10 +2,9 @@ package org.assignment.domain.service;
 
 import java.util.List;
 
-import org.assignment.domain.dto.BeerAvailableDTO;
 import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
 
 /**
  * @author Phuongnq
@@ -26,11 +25,12 @@ public interface BeerService {
 	void save(Beer beer);
 
 	/**
-	 * Get a beer
+	 * Get a beer/
 	 * @param beerId
 	 * @return Beer
+	 * @throws Exception 
 	 */
-	Beer findByBeerId(Long beerId);
+	Beer findByBeerId(Long beerId) throws Exception;
 
 	/**
 	 * Delete a beer
@@ -41,9 +41,9 @@ public interface BeerService {
 	/**
 	 * getBeerByStatus
 	 * @param isArchived - Boolean
-	 * @param user 
+	 * @param authentication 
 	 * @return isArchived
 	 */
-	List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived, UserDetails user);
+	Object getBeerByStatus(Boolean isArchived, Authentication authentication);
 
 }

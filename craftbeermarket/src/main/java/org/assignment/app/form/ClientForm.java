@@ -2,6 +2,8 @@ package org.assignment.app.form;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * @author Phuongnq
  * ClientForm
@@ -13,8 +15,10 @@ public class ClientForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -6666761231305653550L;
 
+	@NotEmpty(message="{client.notempty.clientId}")
 	private String clientId;
 
+	@NotEmpty(message="{client.notempty.clientSecret}")
 	private String clientSecret;
 
 	/**

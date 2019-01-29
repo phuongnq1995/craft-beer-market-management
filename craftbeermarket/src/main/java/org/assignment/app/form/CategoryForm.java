@@ -1,19 +1,17 @@
 package org.assignment.app.form;
 
-import java.io.Serializable;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Phuongnq
  * Category form
  */
-public class CategoryForm implements Serializable {
+public class CategoryForm extends BaseForm {
 
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = -7056787765225873628L;
+	private static final long serialVersionUID = 1L;
 
 	private Long categoryId;
 

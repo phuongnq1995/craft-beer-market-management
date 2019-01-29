@@ -1,7 +1,7 @@
 package org.assignment.app.controller;
 
+import org.assignment.app.constant.BeerStatus;
 import org.assignment.app.form.BeerForm;
-import org.assignment.common.BeerStatus;
 import org.assignment.common.CopyProperties;
 import org.assignment.common.Messages;
 import org.assignment.domain.entity.Beer;
@@ -123,11 +123,19 @@ public class BeerController {
 	 */
 	@RequestMapping(value = "update/{beerId}", method = RequestMethod.GET)
 	public String displayUpdate(@PathVariable("beerId") Long beerId, BeerForm beerForm, Model model) {
-		Beer beer = beerService.findByBeerId(beerId);
+		try {
+			Beer beer = beerService.findByBeerId(beerId);
 
-		CopyProperties.copyProperties(beer, beerForm);
+			CopyProperties.copyProperties(beer, beerForm);
 
-		addCommon(model);
+			addCommon(model);
+		} catch (Exception ex) {
+
+			// Message exception
+			model.addAttribute(Messages.error().message(ex.getMessage()));
+			return UPDATE_PAGE_PATH;
+		}
+
 		return UPDATE_PAGE_PATH;
 	}
 
@@ -149,7 +157,7 @@ public class BeerController {
 		}
 
 		try {
-			Beer beer = new Beer();
+			Beer beer = beerService.findByBeerId(beerForm.getBeerId());
 
 			// Copy data from form to entity
 			CopyProperties.copyProperties(beerForm, beer);

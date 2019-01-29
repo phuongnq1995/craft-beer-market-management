@@ -1,6 +1,5 @@
 package org.assignment.app.form;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.Min;
@@ -12,12 +11,12 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Phuongnq
  * BeerForm
  */
-public class BeerForm implements Serializable {
+public class BeerForm extends BaseForm {
 
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = 1286331936968050224L;
+	private static final long serialVersionUID = 1L;
 
 	private Long beerId;
 

@@ -1,13 +1,12 @@
 package org.assignment.app.controller.api;
 
-import java.util.List;
-
-import org.assignment.common.BeerStatus;
-import org.assignment.domain.dto.BeerAvailableDTO;
-import org.assignment.domain.model.UserCustomDetails;
+import org.assignment.app.constant.BeerStatus;
 import org.assignment.domain.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,10 +27,15 @@ public class RestBeerController {
 	 * @return list of beers available
 	 */
 	@RequestMapping
-	public @ResponseBody List<BeerAvailableDTO> getBeerAvailabel(@AuthenticationPrincipal UserCustomDetails user) {
+	@ResponseBody
+	public ResponseEntity<Object> getBeerAvailabel() throws Exception {
+
+		// Authentication if logged else null
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		// Get list of beers available
-		List<BeerAvailableDTO> listBeers = beerService.getBeerByStatus(BeerStatus.AVAILABLE.getValue(), user);
-		return listBeers;
+		Object listBeers = beerService.getBeerByStatus(BeerStatus.AVAILABLE.getValue(), authentication);
+		return new ResponseEntity<Object>(listBeers, HttpStatus.OK);
 	}
 
 }

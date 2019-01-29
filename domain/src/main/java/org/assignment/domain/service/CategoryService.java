@@ -33,7 +33,8 @@ public interface CategoryService {
 	 * Select category by categoryId
 	 * @param categoryId
 	 * @return Category
+	 * @throws Exception
 	 */
-	Category findByCategoryId(Long categoryId);
+	Category findByCategoryId(Long categoryId) throws Exception;
 
 }

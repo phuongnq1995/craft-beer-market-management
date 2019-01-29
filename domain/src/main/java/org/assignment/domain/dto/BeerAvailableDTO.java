@@ -2,6 +2,10 @@ package org.assignment.domain.dto;
 
 import java.math.BigDecimal;
 
+/**
+ * @author phuongnq
+ * BeerAvailableDTO
+ */
 public class BeerAvailableDTO {
 
 	protected Long beerId;

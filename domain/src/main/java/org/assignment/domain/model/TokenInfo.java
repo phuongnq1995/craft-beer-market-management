@@ -1,7 +1,8 @@
 package org.assignment.domain.model;
 
 /**
- * @author phuongnq TokenInfo
+ * @author phuongnq 
+ * TokenInfo
  */
 public class TokenInfo {
 

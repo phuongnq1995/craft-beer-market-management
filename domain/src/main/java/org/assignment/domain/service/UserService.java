@@ -26,4 +26,12 @@ public interface UserService {
 	 * @param user
 	 */
 	void registerCustomer(User user);
+
+	/**
+	 * Check exist user
+	 * @param username
+	 * @param password
+	 * @return true if exist else false
+	 */
+	boolean checkExistUser(String username, String password);
 }

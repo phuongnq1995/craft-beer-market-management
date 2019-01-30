@@ -3,6 +3,7 @@ package org.assignment.app.controller.api;
 import javax.servlet.http.HttpServletResponse;
 
 import org.assignment.app.form.ConsumeForm;
+import org.assignment.domain.entity.Beer;
 import org.assignment.domain.entity.History;
 import org.assignment.domain.model.UserCustomDetails;
 import org.assignment.domain.service.BeerService;
@@ -46,11 +47,14 @@ public class RestCustomerController {
 			HttpServletResponse response) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserCustomDetails userDetails = (UserCustomDetails) authentication.getPrincipal();
-
-		if(beerService.findByBeerId(consumeForm.getBeerId()) == null) {
+		Beer beer = null;
+		try {
+			beer = beerService.findByBeerId(consumeForm.getBeerId());
+		} catch (Exception e) {
+			// Not found beer
 			throw new Exception("comsume.notfound.beerId"); 
 		}
-		History history = new History(userDetails.getUsername(), consumeForm.getBeerId());
+		History history = new History(userDetails.getUsername(), beer.getBeerId());
 		history = customerService.addHistory(history);
 
 		return new ResponseEntity<>(history, HttpStatus.CREATED);

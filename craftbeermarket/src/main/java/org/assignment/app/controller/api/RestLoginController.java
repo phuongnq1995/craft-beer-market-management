@@ -67,6 +67,7 @@ public class RestLoginController {
 			result = jwtService.generateToken(loginForm.getUsername(), TokenType.CUSTOMER);
 		} else {
 
+			// User invalid
 			throw new Exception("message.loginError");
 		}
 		return new ResponseEntity<>(result, HttpStatus.OK);

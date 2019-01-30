@@ -1,0 +1,172 @@
+date:2019-01-30 15:57:48	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. alter table user_role drop constraint if exists FKa68196081fvovjhkek5m97n3y  {executed in 328 msec}
+date:2019-01-30 15:57:48	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. alter table user_role drop constraint if exists FKg12aik6qdq9b27jnj3ig6jyhj  {executed in 318 msec}
+date:2019-01-30 15:57:48	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists beer cascade  {executed in 315 msec}
+date:2019-01-30 15:57:49	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists category cascade  {executed in 342 msec}
+date:2019-01-30 15:57:49	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists client cascade  {executed in 333 msec}
+date:2019-01-30 15:57:49	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists history cascade  {executed in 319 msec}
+date:2019-01-30 15:57:50	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists m_user cascade  {executed in 329 msec}
+date:2019-01-30 15:57:50	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists role cascade  {executed in 420 msec}
+date:2019-01-30 15:57:51	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists token cascade  {executed in 346 msec}
+date:2019-01-30 15:57:51	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop table if exists user_role cascade  {executed in 307 msec}
+date:2019-01-30 15:57:51	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+1. drop sequence if exists hibernate_sequence  {executed in 300 msec}
+date:2019-01-30 15:57:53	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create sequence hibernate_sequence start 1 increment 1  {executed in 466 msec}
+date:2019-01-30 15:57:53	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table beer ( beer_id int8 not null, created_at timestamp, created_by varchar(20), updated_at 
+timestamp, updated_by varchar(20), version int4, category_id int8, country varchar(255), description 
+varchar(255), is_archived boolean, manufacturer varchar(255), name varchar(255), price numeric(19, 
+2), primary key (beer_id) )  {executed in 348 msec}
+date:2019-01-30 15:57:54	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table category ( category_id int8 not null, created_at timestamp, created_by varchar(20), 
+updated_at timestamp, updated_by varchar(20), version int4, description varchar(255), name 
+varchar(255), primary key (category_id) )  {executed in 344 msec}
+date:2019-01-30 15:57:54	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table client ( client_id varchar(255) not null, created_at timestamp, created_by varchar(20), 
+updated_at timestamp, updated_by varchar(20), version int4, client_secret varchar(255), primary 
+key (client_id) )  {executed in 336 msec}
+date:2019-01-30 15:57:54	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table history ( history_id int8 not null, created_at timestamp, created_by varchar(20), 
+updated_at timestamp, updated_by varchar(20), version int4, beer_id int8, username varchar(255), 
+primary key (history_id) )  {executed in 362 msec}
+date:2019-01-30 15:57:55	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table m_user ( username varchar(255) not null, created_at timestamp, created_by varchar(20), 
+updated_at timestamp, updated_by varchar(20), version int4, fullname varchar(255), is_enabled 
+boolean, login_failure_count int4, password varchar(255), primary key (username) )  {executed in 348 msec}
+date:2019-01-30 15:57:55	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table role ( role_id int8 not null, created_at timestamp, created_by varchar(20), updated_at 
+timestamp, updated_by varchar(20), version int4, role_name varchar(255), primary key (role_id) 
+)  {executed in 394 msec}
+date:2019-01-30 15:57:55	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table token ( value varchar(255) not null, created_at timestamp, created_by varchar(20), 
+updated_at timestamp, updated_by varchar(20), version int4, expire_time timestamp, owner varchar(255), 
+type varchar(255), primary key (value) )  {executed in 479 msec}
+date:2019-01-30 15:57:56	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. create table user_role ( username varchar(255) not null, role_id int8 not null, primary key 
+(username, role_id) )  {executed in 409 msec}
+date:2019-01-30 15:57:56	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. alter table user_role add constraint FKa68196081fvovjhkek5m97n3y foreign key (role_id) references 
+role  {executed in 471 msec}
+date:2019-01-30 15:57:57	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. alter table user_role add constraint FKg12aik6qdq9b27jnj3ig6jyhj foreign key (username) references 
+m_user  {executed in 450 msec}
+date:2019-01-30 15:57:57	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO role (role_id, role_name, version) VALUES (1, 'ROLE_ADMIN', 0)  {executed in 331 msec}
+date:2019-01-30 15:57:58	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO role (role_id, role_name, version) VALUES (2, 'ROLE_CUSTOMER', 0)  {executed in 346 msec}
+date:2019-01-30 15:57:58	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO m_user (fullname, is_enabled, login_failure_count, password, username, version) 
+VALUES ('Administrator', true, 0, '$2a$11$mgai3.7p8B//jwexcYyYheZWxxOULgRP.KhFl56E0kp9i608DBB7W', 
+'admin', 0)  {executed in 622 msec}
+date:2019-01-30 15:57:58	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO user_role (username, role_id) VALUES ('admin', 1)  {executed in 302 msec}
+date:2019-01-30 15:57:59	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO client (client_id, client_secret, version) VALUES ('client', 'secret', 0)  {executed in 303 msec}
+date:2019-01-30 15:57:59	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO category(category_id, name, version) VALUES(3600, 'Ales', 0)  {executed in 312 msec}
+date:2019-01-30 15:57:59	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO category(category_id, name, version) VALUES(3601, 'Chivas', 0)  {executed in 323 msec}
+date:2019-01-30 15:58:00	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO beer(category_id, name, beer_id, manufacturer, description, country, price, is_archived, 
+version) VALUES(3600, 'Ales White', 3999, 'US', '', 'CANADA', 299.00, true, 0)  {executed in 640 msec}
+date:2019-01-30 15:58:00	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+2. INSERT INTO beer(category_id, name, beer_id, manufacturer, description, country, price, is_archived, 
+version) VALUES(3601, 'Chivas 18', 3998, 'UK', '', 'HongKong', 299.00, false, 0)  {executed in 369 msec}
+date:2019-01-30 15:58:01	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.e.t.j.platform.internal.JtaPlatformInitiator	message:No JtaPlatform was specified, checking resolver
+date:2019-01-30 15:58:01	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.e.t.j.p.i.JtaPlatformResolverInitiator      	message:No JtaPlatformResolver was specified, using default [org.hibernate.engine.transaction.jta.platform.internal.StandardJtaPlatformResolver]
+date:2019-01-30 15:58:01	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.e.t.j.p.internal.StandardJtaPlatformResolver	message:Could not resolve JtaPlatform, using default [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+date:2019-01-30 15:58:02	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:02	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:02	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:03	thread:localhost-startStop-1	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:58:05	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.springframework.web.servlet.DispatcherServlet 	message:FrameworkServlet 'appServlet': initialization started
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/api/beer]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> org.assignment.app.controller.api.RestBeerController.getBeerAvailabel(int,int) throws java.lang.Exception
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/api/customer/consume],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> org.assignment.app.controller.api.RestCustomerController.consume(org.assignment.app.form.ConsumeForm,javax.servlet.http.HttpServletResponse) throws java.lang.Exception
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/api/login/client],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> org.assignment.app.controller.api.RestLoginController.generateToken(org.assignment.app.form.ClientForm) throws java.lang.Exception
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/api/login/customer],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> org.assignment.app.controller.api.RestLoginController.generateToken(org.assignment.app.form.LoginForm) throws java.lang.Exception
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/api/register/customer],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> org.assignment.app.controller.api.RestRegisterController.register(org.assignment.app.form.AuthForm) throws java.lang.Exception
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/auth/register],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.AuthController.displayRegister()
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.AuthController.displayLogin()
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/auth/register],methods=[POST]}" onto public java.lang.String org.assignment.app.controller.AuthController.processRegistration(org.assignment.app.form.AuthForm,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/beer]}" onto public java.lang.String org.assignment.app.controller.BeerController.index(org.springframework.ui.Model)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/beer/delete/{beerId}],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.BeerController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/beer/register],methods=[POST]}" onto public java.lang.String org.assignment.app.controller.BeerController.processRegister(org.assignment.app.form.BeerForm,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/beer/register],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.BeerController.displayRegister(org.assignment.app.form.BeerForm,org.springframework.ui.Model)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/beer/update/{beerId}],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.BeerController.displayUpdate(java.lang.Long,org.assignment.app.form.BeerForm,org.springframework.ui.Model)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/beer/update],methods=[POST]}" onto public java.lang.String org.assignment.app.controller.BeerController.processUpdate(org.assignment.app.form.BeerForm,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/category]}" onto public java.lang.String org.assignment.app.controller.CategoryController.index(org.springframework.ui.Model)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/category/delete/{categoryId}],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.CategoryController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/category/register],methods=[POST]}" onto public java.lang.String org.assignment.app.controller.CategoryController.processRegister(org.assignment.app.form.CategoryForm,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/category/register],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.CategoryController.displayRegister(org.assignment.app.form.CategoryForm,org.springframework.ui.Model)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/category/update/{categoryId}],methods=[GET]}" onto public java.lang.String org.assignment.app.controller.CategoryController.displayUpdate(java.lang.Long,org.assignment.app.form.CategoryForm,org.springframework.ui.Model)
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/category/update],methods=[POST]}" onto public java.lang.String org.assignment.app.controller.CategoryController.processUpdate(org.assignment.app.form.CategoryForm,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes) throws java.lang.Exception
+date:2019-01-30 15:58:06	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerMapping      	message:Mapped "{[/]}" onto public java.lang.String org.assignment.app.controller.HomeController.home(org.springframework.ui.Model)
+date:2019-01-30 15:58:07	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerAdapter      	message:Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jan 30 15:58:05 ICT 2019]; parent: Root WebApplicationContext
+date:2019-01-30 15:58:07	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.RequestMappingHandlerAdapter      	message:Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jan 30 15:58:05 ICT 2019]; parent: Root WebApplicationContext
+date:2019-01-30 15:58:07	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver 	message:Detected @ExceptionHandler methods in restResponseEntityExceptionHandler
+date:2019-01-30 15:58:07	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.web.servlet.handler.SimpleUrlHandlerMapping 	message:Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+date:2019-01-30 15:58:07	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.s.web.servlet.handler.SimpleUrlHandlerMapping 	message:Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+date:2019-01-30 15:58:07	thread:localhost-startStop-1	X-Track:	level:INFO 	logger:o.springframework.web.servlet.DispatcherServlet 	message:FrameworkServlet 'appServlet': initialization completed in 2658 ms
+date:2019-01-30 15:59:32	thread:http-nio-8080-exec-5	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+date:2019-01-30 15:59:32	thread:http-nio-8080-exec-5	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:begin
+date:2019-01-30 15:59:33	thread:http-nio-8080-exec-5	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:60)
+3. select user0_.username as username1_4_0_, user0_.created_at as created_2_4_0_, user0_.created_by 
+as created_3_4_0_, user0_.updated_at as updated_4_4_0_, user0_.updated_by as updated_5_4_0_, 
+user0_.version as version6_4_0_, user0_.fullname as fullname7_4_0_, user0_.is_enabled as is_enabl8_4_0_, 
+user0_.login_failure_count as login_fa9_4_0_, user0_.password as passwor10_4_0_ from m_user 
+user0_ where user0_.username='admin'  {executed in 513 msec}
+date:2019-01-30 15:59:33	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|---------------|---------------|---------------|---------------|---------------|--------------|---------------|---------------|---------------|-------------------------------------------------------------|
+date:2019-01-30 15:59:33	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|username1_4_0_ |created_2_4_0_ |created_3_4_0_ |updated_4_4_0_ |updated_5_4_0_ |version6_4_0_ |fullname7_4_0_ |is_enabl8_4_0_ |login_fa9_4_0_ |passwor10_4_0_                                               |
+date:2019-01-30 15:59:33	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|---------------|---------------|---------------|---------------|---------------|--------------|---------------|---------------|---------------|-------------------------------------------------------------|
+date:2019-01-30 15:59:33	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|admin          |null           |null           |null           |null           |0             |Administrator  |true           |0              |$2a$11$mgai3.7p8B//jwexcYyYheZWxxOULgRP.KhFl56E0kp9i608DBB7W |
+date:2019-01-30 15:59:33	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|---------------|---------------|---------------|---------------|---------------|--------------|---------------|---------------|---------------|-------------------------------------------------------------|
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:60)
+3. select roles0_.username as username1_7_0_, roles0_.role_id as role_id2_7_0_, role1_.role_id 
+as role_id1_5_1_, role1_.created_at as created_2_5_1_, role1_.created_by as created_3_5_1_, 
+role1_.updated_at as updated_4_5_1_, role1_.updated_by as updated_5_5_1_, role1_.version as 
+version6_5_1_, role1_.role_name as role_nam7_5_1_ from user_role roles0_ inner join role role1_ 
+on roles0_.role_id=role1_.role_id where roles0_.username='admin'  {executed in 453 msec}
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|---------------|--------------|--------------|---------------|---------------|---------------|---------------|--------------|---------------|
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|username1_7_0_ |role_id2_7_0_ |role_id1_5_1_ |created_2_5_1_ |created_3_5_1_ |updated_4_5_1_ |updated_5_5_1_ |version6_5_1_ |role_nam7_5_1_ |
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|---------------|--------------|--------------|---------------|---------------|---------------|---------------|--------------|---------------|
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|admin          |1             |1             |null           |null           |null           |null           |0             |ROLE_ADMIN     |
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:INFO 	logger:jdbc.resultsettable                             	message:|---------------|--------------|--------------|---------------|---------------|---------------|---------------|--------------|---------------|
+date:2019-01-30 15:59:34	thread:http-nio-8080-exec-5	X-Track:	level:DEBUG	logger:o.h.engine.transaction.internal.TransactionImpl 	message:committing
+date:2019-01-30 16:01:59	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. alter table user_role drop constraint if exists FKa68196081fvovjhkek5m97n3y  {executed in 700 msec}
+date:2019-01-30 16:02:00	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. alter table user_role drop constraint if exists FKg12aik6qdq9b27jnj3ig6jyhj  {executed in 830 msec}
+date:2019-01-30 16:02:00	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists beer cascade  {executed in 502 msec}
+date:2019-01-30 16:02:01	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists category cascade  {executed in 462 msec}
+date:2019-01-30 16:02:01	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists client cascade  {executed in 388 msec}
+date:2019-01-30 16:02:02	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists history cascade  {executed in 664 msec}
+date:2019-01-30 16:02:02	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists m_user cascade  {executed in 358 msec}
+date:2019-01-30 16:02:03	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists role cascade  {executed in 695 msec}
+date:2019-01-30 16:02:04	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists token cascade  {executed in 528 msec}
+date:2019-01-30 16:02:04	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop table if exists user_role cascade  {executed in 541 msec}
+date:2019-01-30 16:02:05	thread:localhost-startStop-2	X-Track:	level:DEBUG	logger:jdbc.sqltiming                                  	message: org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+4. drop sequence if exists hibernate_sequence  {executed in 402 msec}

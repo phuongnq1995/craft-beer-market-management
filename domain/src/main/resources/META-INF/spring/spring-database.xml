@@ -68,7 +68,8 @@
 
  	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg index="0" ref="realDataSource" />
-	</bean>  -->
+	</bean>
+-->
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

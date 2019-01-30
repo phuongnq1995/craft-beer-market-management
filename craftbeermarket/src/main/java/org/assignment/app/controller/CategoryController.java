@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * @author Phuongnq Category controller handler
+ * @author Phuongnq 
+ * Category controller handler
  */
 @Controller
 @RequestMapping(value = "category")

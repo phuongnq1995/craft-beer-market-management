@@ -20,11 +20,6 @@ public class UserCustomDetails implements UserDetails {
 	private final User user;
 	private final Collection<GrantedAuthority> authorities;
 
-	/**
-	 * Contructor
-	 * @param user - The user
-	 * @param authorities - GrantedAuthority collection
-	 */
 	public UserCustomDetails(User user, Collection<GrantedAuthority> authorities) {
 		this.user = user;
 		this.authorities = authorities;

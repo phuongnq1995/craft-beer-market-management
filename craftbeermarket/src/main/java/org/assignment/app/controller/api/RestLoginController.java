@@ -1,6 +1,8 @@
 package org.assignment.app.controller.api;
 
 import org.assignment.app.form.ClientForm;
+import org.assignment.app.form.LoginForm;
+import org.assignment.domain.service.CustomerService;
 import org.assignment.domain.service.JwtService;
 import org.assignment.domain.util.TokenType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * JwtController
  */
 @Controller
-@RequestMapping(value = "api/client")
+@RequestMapping(value = "api/login")
 public class RestLoginController {
 
 	@Autowired
 	JwtService jwtService;
+
+	@Autowired
+	CustomerService customerService;
 
 	/**
 	 * Get token
@@ -30,7 +35,7 @@ public class RestLoginController {
 	 * @return token
 	 * @throws Exception 
 	 */
-	@RequestMapping(value="login", method=RequestMethod.POST)
+	@RequestMapping(value="client", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Object> generateToken(@RequestBody @Validated ClientForm client) throws Exception {
 
@@ -44,5 +49,26 @@ public class RestLoginController {
 			throw new Exception("message.clientError");
 		}
 		return new ResponseEntity<>(result, httpStatus);
+	}
+
+	/**
+	 * Get token
+	 * @param customer - username and password
+	 * @return token
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="customer", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Object> generateToken(@RequestBody @Validated LoginForm loginForm) throws Exception {
+		Object result = null;
+
+		if (customerService.checkExistCustomer(loginForm.getUsername(), loginForm.getPassword())) {
+
+			result = jwtService.generateToken(loginForm.getUsername(), TokenType.CUSTOMER);
+		} else {
+
+			throw new Exception("message.loginError");
+		}
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 }

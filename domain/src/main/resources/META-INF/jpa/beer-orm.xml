@@ -50,7 +50,7 @@
 	</named-native-query>
 
 	<named-native-query name="Beer.getBeerByStatus" result-set-mapping="beerAvailableDTO">
-		<query>
+		<query><![CDATA[
 			SELECT 
 						b.beer_id AS beerId, 
 						b.manufacturer AS manufacturer, 
@@ -63,9 +63,44 @@
 						beer b 
 			INNER JOIN category c 
 						ON b.category_id = c.category_id
-			WHERE		b.is_archived = ?
+			WHERE		b.is_archived = :isArchived
 			ORDER BY c.name, b.name
-		</query>
+			LIMIT :size
+			OFFSET :from
+		]]></query>
+	</named-native-query>
+
+	<named-native-query name="Beer.getBeerHaveNotTried" result-set-mapping="beerAvailableDTO">
+		<query><![CDATA[
+			SELECT 
+						b.beer_id AS beerId, 
+						b.manufacturer AS manufacturer, 
+						b.name AS name, 
+						b.country AS country,
+						b.description AS description, 
+						b.price AS price, 
+						c.name as categoryName 
+			FROM
+						beer b 
+			INNER JOIN category c 
+						ON b.category_id = c.category_id
+			WHERE
+				NOT EXISTS 
+					(SELECT h.beer_id FROM history h WHERE h.username =:username AND h.beer_id = b.beer_id)
+				AND 		b.is_archived = :isArchived
+			ORDER BY c.name, b.name
+		]]></query>
+	</named-native-query>
+
+	<named-native-query name="Beer.countBeerByStatus">
+		<query><![CDATA[
+			SELECT count(*)
+			FROM
+						beer b 
+			INNER JOIN category c 
+						ON b.category_id = c.category_id
+			WHERE		b.is_archived = :isArchived
+		]]></query>
 	</named-native-query>
 
 </entity-mappings>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
+import org.assignment.domain.model.BeerClientResult;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 
 /**
@@ -25,7 +27,7 @@ public interface BeerService {
 	void save(Beer beer);
 
 	/**
-	 * Get a beer/
+	 * Get a beer
 	 * @param beerId
 	 * @return Beer
 	 * @throws Exception 
@@ -39,11 +41,13 @@ public interface BeerService {
 	void delete(Long beerId);
 
 	/**
-	 * getBeerByStatus
-	 * @param isArchived - Boolean
-	 * @param authentication 
-	 * @return isArchived
+	 * Get beer by status
+	 * @param isArchived
+	 * @param authentication
+	 * @param page
+	 * @param size
+	 * @return BeerClientResult
 	 */
-	Object getBeerByStatus(Boolean isArchived, Authentication authentication);
+	BeerClientResult getBeerByStatus(Boolean isArchived, Authentication authentication, Pageable pageable);
 
 }

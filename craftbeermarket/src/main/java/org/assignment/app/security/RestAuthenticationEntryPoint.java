@@ -24,14 +24,15 @@ public final class RestAuthenticationEntryPoint implements AuthenticationEntryPo
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException {
 		response.setStatus(HttpStatus.FORBIDDEN.value());
-		response.getWriter().write(messageResult());
+		response.getWriter().write(getMessageResult());
 	}
 
 	/**
+	 * getMessageResult
 	 * @return messageResult
 	 * @throws JsonProcessingException
 	 */
-	private String messageResult() throws JsonProcessingException {
+	private String getMessageResult() throws JsonProcessingException {
 		HttpResponse error = new HttpResponse("Access Denied !", HttpStatus.FORBIDDEN);
 		return new ObjectMapper().writeValueAsString(error);
 	}

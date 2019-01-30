@@ -1,12 +1,14 @@
 package org.assignment.app.form;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Phuongnq
  * Category form
  */
-public class CategoryForm extends BaseForm {
+public class CategoryForm implements Serializable {
 
 	/**
 	 * serialVersionUID

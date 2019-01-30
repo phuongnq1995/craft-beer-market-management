@@ -6,7 +6,7 @@
 	version="2.1">
 
 	<named-native-query name="Category.existAnyBeer">
-		<query>SELECT EXISTS(SELECT 1 FROM beer WHERE category_id = ? LIMIT 1)</query>
+		<query>SELECT EXISTS(SELECT 1 FROM beer WHERE category_id = :categoryId LIMIT 1)</query>
 	</named-native-query>
 
 </entity-mappings>

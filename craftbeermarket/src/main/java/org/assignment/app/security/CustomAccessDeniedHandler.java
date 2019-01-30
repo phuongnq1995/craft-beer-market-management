@@ -27,14 +27,15 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exc)
 			throws IOException, ServletException {
 		response.setStatus(HttpStatus.FORBIDDEN.value());
-		response.getWriter().write(messageResult());
+		response.getWriter().write(getMessageResult());
 	}
 
 	/**
+	 * getMessageResult
 	 * @return messageResult
 	 * @throws JsonProcessingException
 	 */
-	private String messageResult() throws JsonProcessingException {
+	private String getMessageResult() throws JsonProcessingException {
 		HttpResponse error = new HttpResponse("Access Denied !", HttpStatus.FORBIDDEN);
 		return new ObjectMapper().writeValueAsString(error);
 	}

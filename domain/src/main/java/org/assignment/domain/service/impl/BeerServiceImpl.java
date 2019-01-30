@@ -1,17 +1,21 @@
 package org.assignment.domain.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.assignment.domain.dto.BeerAvailableDTO;
 import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.dto.HistoryDTO;
 import org.assignment.domain.entity.Beer;
+import org.assignment.domain.model.BeerClientResult;
 import org.assignment.domain.model.UserCustomDetails;
-import org.assignment.domain.model.UserPassport;
+import org.assignment.domain.model.BeerUserResult;
 import org.assignment.domain.repository.BeerRepository;
 import org.assignment.domain.repository.HistoryRepository;
 import org.assignment.domain.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,11 +46,24 @@ public class BeerServiceImpl implements BeerService {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.assignment.domain.service.BeerService#getBeerByStatus(java.lang.Boolean, org.springframework.security.core.Authentication)
+	 * @see org.assignment.domain.service.BeerService#getBeerByStatus(org.springframework.data.domain.Pageable, java.lang.Boolean, org.springframework.security.core.Authentication)
 	 */
 	@Override
-	public Object getBeerByStatus(Boolean isArchived, Authentication authentication) {
-		List<BeerAvailableDTO> beers = beerRepository.getBeerByStatus(isArchived);
+	public BeerClientResult getBeerByStatus(Boolean isArchived, Authentication authentication, Pageable pageable) {
+		// Initial
+		BeerClientResult beerApiResult = new BeerClientResult();
+		List<BeerAvailableDTO> beersAvailable = new ArrayList<>();
+		List<BeerAvailableDTO> beersHaveNotTried = null;
+
+		// Get total
+		long total = beerRepository.countBeerByStatus(isArchived);
+
+		if(total > 0) {
+			beersAvailable = beerRepository.getBeerByStatus(isArchived, pageable.getPageSize(), pageable.getOffset());
+		}
+
+		// Set beers to client result
+		beerApiResult.setBeers(new PageImpl<>(beersAvailable, pageable, total));
 
 		// If user customer
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -54,11 +71,16 @@ public class BeerServiceImpl implements BeerService {
 
 			// Select history
 			List<HistoryDTO> histories = historyRepository.findHistoryByUser(user.getUsername());
-			return new UserPassport(beers, histories);
+
+			// Select list of beers they haven't tried
+			beersHaveNotTried = beerRepository.getBeerHaveNotTried(isArchived, user.getUsername());
+
+			// Cast to user result
+			beerApiResult = new BeerUserResult(beerApiResult, histories, beersHaveNotTried);
 		}
 
-		// Return beers available
-		return beers;
+		// Return beers available in client
+		return beerApiResult;
 	}
 
 	/* (non-Javadoc)

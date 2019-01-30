@@ -26,7 +26,7 @@ public final class TokenUtils {
 	}
 
 	/**
-	 * Generate Ramdom Token
+	 * Generate Random Token
 	 * @param clientId
 	 * @return token
 	 */

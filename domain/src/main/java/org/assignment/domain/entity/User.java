@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class User extends BaseEntityAudit {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 

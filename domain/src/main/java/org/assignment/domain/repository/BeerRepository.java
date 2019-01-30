@@ -1,12 +1,11 @@
 package org.assignment.domain.repository;
 
 import java.util.List;
-
 import org.assignment.domain.dto.BeerAvailableDTO;
 import org.assignment.domain.dto.BeerDTO;
 import org.assignment.domain.entity.Beer;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * @author Phuongnq
@@ -16,12 +15,42 @@ import org.springframework.data.jpa.repository.Query;
 public interface BeerRepository extends JpaRepository<Beer, Long> {
 
 	/**
-	 * getAllBeer store query in {@code META-INF/jpa-named-queries.properties} file.
+	 * Get all beers
+	 * {@code META-INF/jpa/beer-orm.xml} file.
 	 * @return all beer information
 	 */
-	@Query(nativeQuery=true)
 	List<BeerDTO> getAllBeer();
 
-	@Query(nativeQuery=true)
-	List<BeerAvailableDTO> getBeerByStatus(Boolean isArchived);
+	/**
+	 * Get list of beers by status
+	 * {@code META-INF/jpa/beer-orm.xml} file.
+	 * @param isArchived
+	 * @param offset
+	 * @param limit
+	 * @return List<BeerAvailableDTO> available
+	 */
+	List<BeerAvailableDTO> getBeerByStatus(
+		@Param("isArchived") Boolean isArchived, 
+		@Param("size") int size, 
+		@Param("from") int from);
+
+	/**
+	 * Get list of beers have not tried
+	 * {@code META-INF/jpa/beer-orm.xml} file.
+	 * @param isArchived
+	 * @param username
+	 * @return List<BeerAvailableDTO> have not tried
+	 */
+	List<BeerAvailableDTO> getBeerHaveNotTried(
+			@Param("isArchived") Boolean isArchived, 
+			@Param("username") String username);
+
+	/**
+	 * Count beers by status
+	 * {@code META-INF/jpa/beer-orm.xml} file.
+	 * @param isArchived
+	 * @return size
+	 */
+	long countBeerByStatus(@Param("isArchived") Boolean isArchived);
+
 }

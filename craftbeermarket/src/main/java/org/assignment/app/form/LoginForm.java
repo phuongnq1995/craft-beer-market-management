@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author phuongnq
- * CustomerLoginForm
+ * LoginForm
  */
 public class LoginForm implements Serializable {
 

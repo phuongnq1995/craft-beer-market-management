@@ -74,7 +74,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 	/**
 	 * Message Result
-	 * @return
 	 * @throws IOException 
 	 */
 	private void setResponse(HttpServletResponse response) throws IOException {

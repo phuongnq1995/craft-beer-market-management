@@ -26,11 +26,20 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	@Autowired
 	MessageSource messageSource;
 
+	/**
+	 * handleBusinessException
+	 * @param ex
+	 * @param request
+	 * @return HttpStatus.CONFLICT
+	 */
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Object> handleBusinessException(Exception ex, WebRequest request) {
 		return handleResultMessagesNotificationException(ex, new HttpHeaders(), HttpStatus.CONFLICT, request);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler#handleExceptionInternal(java.lang.Exception, java.lang.Object, org.springframework.http.HttpHeaders, org.springframework.http.HttpStatus, org.springframework.web.context.request.WebRequest)
+	 */
 	@Override
 	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
@@ -41,6 +50,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		return ResponseEntity.status(status).headers(headers).body(responseBody);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler#handleMethodArgumentNotValid(org.springframework.web.bind.MethodArgumentNotValidException, org.springframework.http.HttpHeaders, org.springframework.http.HttpStatus, org.springframework.web.context.request.WebRequest)
+	 */
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -54,16 +66,39 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		return handleExceptionInternal(ex, apiError, headers, status, request);
 	}
 
+	/**
+	 * createApiError
+	 * @param request
+	 * @param errorCode
+	 * @param args
+	 * @return Json errors
+	 * @throws NoSuchMessageException
+	 */
 	private ApiError createApiError(WebRequest request, String errorCode, Object... args) throws NoSuchMessageException{
 		return new ApiError(errorCode, messageSource.getMessage(errorCode, args, request.getLocale()));
 	}
 
+	/**
+	 * createApiError
+	 * @param request
+	 * @param messageSourceResolvable
+	 * @param target
+	 * @return Json errors
+	 */
 	private ApiError createApiError(WebRequest request, DefaultMessageSourceResolvable messageSourceResolvable,
 			String target) {
 		return new ApiError(messageSourceResolvable.getCode(),
 				messageSource.getMessage(messageSourceResolvable, request.getLocale()), target);
 	}
 
+	/**
+	 * handleResultMessagesNotificationException
+	 * @param ex
+	 * @param headers
+	 * @param status
+	 * @param request
+	 * @return return ResponseEntity<Object>
+	 */
 	private ResponseEntity<Object> handleResultMessagesNotificationException(Exception ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		ApiError apiError = createApiError(request, ex.getMessage());

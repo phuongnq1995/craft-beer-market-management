@@ -15,7 +15,7 @@
 				FROM	history h
 				LEFT JOIN	beer b 
 				ON  		b.beer_id = h.beer_id
-				WHERE		h.username = ?
+				WHERE		h.username = :username
 				ORDER BY 	h.created_at DESC
 		</query>
 	</named-native-query>

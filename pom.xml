@@ -21,7 +21,7 @@
 		<spring-security-oauth2.version>2.0.3.RELEASE</spring-security-oauth2.version>
 
 		<!-- postgresql versions -->
-		<postgresql.version>9.4-1201-jdbc4</postgresql.version>
+		<postgresql.version>42.2.1</postgresql.version>
 
 		<!-- junit versions -->
 		<junit.version>3.8.1</junit.version>

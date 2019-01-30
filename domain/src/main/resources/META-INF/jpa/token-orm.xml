@@ -6,7 +6,7 @@
 	version="2.1">
 
 	<named-native-query name="Token.getUsernameFromToken" >
-		<query>SELECT owner FROM token WHERE value = ? AND type = ?</query>
+		<query>SELECT owner FROM token WHERE value =:tokenValue AND type =:type</query>
 	</named-native-query>
 
 </entity-mappings>

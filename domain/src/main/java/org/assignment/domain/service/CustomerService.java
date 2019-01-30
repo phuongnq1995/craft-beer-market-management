@@ -28,7 +28,7 @@ public interface CustomerService {
 	 * Check exist customer
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return true if exist else false
 	 */
 	boolean checkExistCustomer(String username, String password);
 

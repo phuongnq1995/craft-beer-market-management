@@ -4,9 +4,8 @@ import java.math.BigDecimal;
 
 /**
  * @author phuongnq 
- * BeerModel
+ * BeerDTO
  */
-
 public class BeerDTO extends BeerAvailableDTO {
 
 	private Boolean isArchived;

@@ -1,16 +1,16 @@
-Nguyen-Quang-Phuong-Assignment
+Nguyen-Quang-Phuong-Assignment  <br />
 
-Link heroku : http://craft-beer-market-management.herokuapp.com
+Link heroku : http://craft-beer-market-management.herokuapp.com  <br />
 
-User(Admin) web interface
-username:admin
-password:admin
+User(Admin) web interface  <br />
+username:admin  <br />
+password:admin  <br />
 
-Client(mobile app) web api to authorization.
-clientId:client
-clientSecret:secret
+Client(mobile app) web api to authorization.  <br />
+clientId:client  <br />
+clientSecret:secret  <br />
 
-GUIDELINE API(Use curl or postman for testing)
+GUIDELINE API (Use curl or postman for testing)  <br />
 
 -Client app want to use Api like anonymously without logging have to call to get token.  <br />
 Use client token set to header "Authorization" tag in per request to backend.  <br />

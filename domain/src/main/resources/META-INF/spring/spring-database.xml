@@ -22,7 +22,7 @@
 		<property name="persistenceUnitName" value="persistenceUnit" />
 		<property name="jpaPropertyMap">
 			<util:map>
-			<!-- <entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" /> -->
+				<entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
 				<entry key="hibernate.dialect" value="${hibernate.dialect}" />
 				<entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}" /> 
 				<entry key="hibernate.temp.use_jdbc_metadata_defaults" value="${hibernate.temp.use_jdbc_metadata_defaults}" />
